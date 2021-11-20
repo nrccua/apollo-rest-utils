@@ -1,0 +1,46 @@
+{
+  "author": "Adam Weeden <adam.weeden@encoura.org>",
+  "bugs": {
+    "url": "https://github.com/nrccua/apollo-rest-utils/issues"
+  },
+  "description": "A helper package that makes connecting apollo to rest endpoints as painless as possible",
+  "devDependencies": {
+    "@encoura/eslint-config": "git+https://github.com/nrccua/eslint-config.git",
+    "husky": "7.0.4",
+    "jest": "27.3.1",
+    "lint-staged": "12.0.3",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.4.1",
+    "standard-version": "9.3.2",
+    "ts-jest": "27.0.7",
+    "typescript": "4.5.2"
+  },
+  "homepage": "https://github.com/nrccua/apollo-rest-utils#readme",
+  "keywords": [
+    "rest",
+    "apollo",
+    "apollo-rest-link",
+    "graphql"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "apollo-rest-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrccua/apollo-rest-utils.git"
+  },
+  "scripts": {
+    "prepare": "husky install && git config --local push.followTags true",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update:version": "standard-version"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "@apollo/client": "3.4.17",
+    "apollo-link": "1.2.14",
+    "apollo-link-rest": "0.7.3",
+    "graphql": "15.7.2",
+    "graphql-anywhere": "4.2.7",
+    "qs": "6.10.1"
+  }
+}

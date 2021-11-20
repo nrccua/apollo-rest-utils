@@ -1,0 +1,12 @@
+{
+    "skip": {
+        "commit": true
+    },
+    "tagPrefix": "",
+    "types": [
+        {
+            "type": "",
+            "section": "Changes"
+        }
+    ]
+}
