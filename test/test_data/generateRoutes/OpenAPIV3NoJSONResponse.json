@@ -1,0 +1,87 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Encourage Service",
+        "description": "Encourage Service endpoints used by Encourage clients and other internal services",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.dev-encourage.myoptions.org/v1",
+            "description": "URL for \"development\" environment"
+        }
+    ],
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Health Checker",
+                "operationId": "health",
+                "description": "Check service status and environment",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "database": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "genericCache": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "myOptions": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "secondarySchoolService": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "studentCredentials": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "studentService": {
+                                            "type": "string",
+                                            "example": "development"
+                                        },
+                                        "ums": {
+                                            "type": "string",
+                                            "example": "development"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "AWS": []
+        },
+        {
+            "JWT": []
+        }
+    ],
+    "externalDocs": {
+        "url": "https://nrccua.atlassian.net/wiki/spaces/MDL/pages/102531073/API+Design+Guidelines",
+        "description": "Learn more about operations on request/response fields provided by this service."
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./lib",
+    "composite": true,
+    "esModuleInterop": true,
+    "incremental": true,
+    "outDir": "./dist",
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "composite": true,
+  "exclude": [
+    "./build/**/*",
+    "./**/*.test.*"
+  ],
+  "extends": "./node_modules/@encoura/eslint-config/tsconfig.json",
+  "include": [
+    "./**/*",
+  ],
+  "target": "es5",
+}

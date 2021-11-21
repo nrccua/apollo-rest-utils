@@ -1,0 +1,410 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Encourage Service",
+        "description": "Encourage Service endpoints used by Encourage clients and other internal services",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.dev-encourage.myoptions.org/v1",
+            "description": "URL for \"development\" environment"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Authenticates a user",
+                "operationId": "login",
+                "security": [
+                    {
+                        "AWS": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "email and password to be used in the authentication process. If acceptedTerms is set to true, it will update user's terms attribute",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "testPassword"
+                                    },
+                                    "acceptedTerms": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponseError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginResponse": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "type": "object",
+                        "properties": {
+                            "uid": {
+                                "type": "string",
+                                "example": "1e6c6d8e-af30-43ca-a519-395734701eba"
+                            },
+                            "type": {
+                                "type": "string",
+                                "example": "User",
+                                "default": "User",
+                                "enum": [
+                                    "LdapUser",
+                                    "Role",
+                                    "User"
+                                ]
+                            },
+                            "firstName": {
+                                "type": "string",
+                                "example": "testUserFirstName"
+                            },
+                            "lastName": {
+                                "type": "string",
+                                "example": "testUserLastName"
+                            },
+                            "userName": {
+                                "type": "string",
+                                "example": "testUserName"
+                            },
+                            "status": {
+                                "type": "string",
+                                "example": "Active",
+                                "enum": [
+                                    "Active",
+                                    "Inactive",
+                                    "Pending",
+                                    "Disabled"
+                                ]
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email",
+                                "example": "test@user.mail"
+                            },
+                            "verifiedDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2019-01-07T18:29:25.493Z"
+                            },
+                            "createdAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2019-01-07T18:29:25.493Z"
+                            },
+                            "updatedAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2019-01-07T18:29:25.493Z"
+                            },
+                            "externalIds": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "uid",
+                                        "userUid",
+                                        "source",
+                                        "externalId"
+                                    ],
+                                    "properties": {
+                                        "uid": {
+                                            "type": "string",
+                                            "example": "aaaa-bbbbb-ccccc-ddddd",
+                                            "description": "UMS unique identifier for the external ID entity"
+                                        },
+                                        "userUid": {
+                                            "type": "string",
+                                            "example": "82596c17-2e90-4321-8f67-c16e4a4ae646"
+                                        },
+                                        "organizationUid": {
+                                            "type": "string",
+                                            "example": "a80585ee-7e81-4d7c-8a75-4c2293243703",
+                                            "description": "Optional property if the external ID for the user is related to an org"
+                                        },
+                                        "source": {
+                                            "type": "string",
+                                            "example": "contact_id"
+                                        },
+                                        "externalId": {
+                                            "type": "string",
+                                            "example": "HCSXFXYZ"
+                                        }
+                                    }
+                                }
+                            },
+                            "creator": {
+                                "type": "object",
+                                "properties": {
+                                    "uid": {
+                                        "type": "string",
+                                        "example": "1e6c6d8e-af30-43ca-a519-395734701eba"
+                                    },
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "testUserFirstName"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "testUserLastName"
+                                    }
+                                }
+                            },
+                            "versionWarning": {
+                                "type": "boolean",
+                                "example": "false",
+                                "default": "false"
+                            },
+                            "application": {
+                                "type": "object",
+                                "properties": {
+                                    "modules": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "uid": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "permissionOverwrite": {
+                                                    "type": "boolean"
+                                                },
+                                                "attributesOverwrite": {
+                                                    "type": "object",
+                                                    "required": [
+                                                        "key"
+                                                    ],
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "example": "tempore"
+                                                        },
+                                                        "value": {
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "Encourage"
+                                    }
+                                }
+                            },
+                            "organizations": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "uid": {
+                                            "type": "string",
+                                            "example": "2e6dba3f-4916-469d-bb6e-01d2c67b2211"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "enum": [
+                                                "Organization",
+                                                "OrgType"
+                                            ]
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "NitzscheandSons"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "enum": [
+                                                "Active",
+                                                "Inactive",
+                                                "Pending"
+                                            ],
+                                            "example": "Pending"
+                                        },
+                                        "sfAccountId": {
+                                            "type": "string",
+                                            "example": "0016000000ImzzJAAR"
+                                        },
+                                        "externalId": {
+                                            "type": "string",
+                                            "example": "003422"
+                                        },
+                                        "actCode": {
+                                            "type": "string",
+                                            "example": "0011"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2017-06-21T16:36:08.039Z"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2017-06-21T16:36:08.039Z"
+                                        },
+                                        "programs": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "group": {},
+                                        "parent": {},
+                                        "creator": {},
+                                        "users": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "applications": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "attributes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "required": [
+                                                    "key"
+                                                ],
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string",
+                                                        "example": "tempore"
+                                                    },
+                                                    "value": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "roles": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "uid": {
+                                            "type": "string",
+                                            "example": "bf45a23c-b527-4c5d-b7b8-60250339d265"
+                                        },
+                                        "roleName": {
+                                            "type": "string",
+                                            "example": "Administrator"
+                                        }
+                                    }
+                                }
+                            },
+                            "attributes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "key"
+                                    ],
+                                    "properties": {
+                                        "key": {
+                                            "type": "string",
+                                            "example": "tempore"
+                                        },
+                                        "value": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "sessionToken": {
+                        "type": "string",
+                        "format": "byte",
+                        "example": "Base64 string"
+                    }
+                }
+            },
+            "LoginResponseError": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "integer",
+                        "example": 400
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Missing user credentials (email and/or password)"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "AWS": []
+        },
+        {
+            "JWT": []
+        }
+    ],
+    "externalDocs": {
+        "url": "https://nrccua.atlassian.net/wiki/spaces/MDL/pages/102531073/API+Design+Guidelines",
+        "description": "Learn more about operations on request/response fields provided by this service."
+    }
+}
