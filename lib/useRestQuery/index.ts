@@ -109,7 +109,8 @@ export function useRestMutation<
  *`   const uid = result.user.uid; // This is properly typed!`
  */
 export function wrapRestMutation<TName extends string>() {
-  return <TData = unknown, TVariables = OperationVariables, TContext = DefaultContext, TCache extends ApolloCache<unknown> = ApolloCache<unknown>>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return <TData = unknown, TVariables = OperationVariables, TContext = DefaultContext, TCache extends ApolloCache<any> = ApolloCache<any>>(
     mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options: IEndpointOptions<TData, TVariables> & MutationHookOptions<TData, TVariables, TContext>,
   ): MutationTuple<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>, TContext, TCache> =>
@@ -177,7 +178,8 @@ export function wrapRestQuery<TName extends string>() {
 
 export function useRestClientQuery<TName extends string, TData, TVariables>(
   options: IEndpointOptions<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>> &
-    QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<unknown> },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<any> },
 ): Promise<ApolloQueryResult<NamedGQLResult<TName, TData>>> {
   validateQueryAgainstEndpoint(options.query, options.endpoint);
   const directives = (options.query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
@@ -219,10 +221,12 @@ export function useRestClientQuery<TName extends string, TData, TVariables>(
  */
 export function wrapRestClientQuery<TName extends string>() {
   return <TData, TVariables>(
-    options: IEndpointOptions<TData, TVariables> & QueryOptions<TVariables, TData> & { client: ApolloClient<unknown> },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: IEndpointOptions<TData, TVariables> & QueryOptions<TVariables, TData> & { client: ApolloClient<any> },
   ): Promise<ApolloQueryResult<NamedGQLResult<TName, TData>>> =>
     useRestClientQuery(
       options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>> &
-        QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<unknown> },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<any> },
     );
 }
