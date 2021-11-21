@@ -1,0 +1,14 @@
+name: PR Branch Labeler
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  label_prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label PRs
+        uses: TheCleric/pr-branch-labeler@v3
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"

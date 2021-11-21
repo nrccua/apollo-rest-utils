@@ -1,0 +1,12 @@
+# Apply label "staging"
+staging:
+  base: "staging"
+
+# Apply label "dev"
+dev:
+  base: "development"
+
+# Apply whatever comes after release/ as the label
+# E.g. Merging into 'release/1.0' will add the label '1.0'
+$1:
+  baseRegExp: "release[/](.*)"
