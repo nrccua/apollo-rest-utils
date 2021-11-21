@@ -1,6 +1,6 @@
 {
   "author": "Adam Weeden <adam.weeden@encoura.org>",
-  "bin": "node dist/generateRoutes/index.js",
+  "bin": "dist/generateRoutes/index.js",
   "bugs": {
     "url": "https://github.com/nrccua/apollo-rest-utils/issues"
   },
