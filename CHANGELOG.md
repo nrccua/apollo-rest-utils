@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/nrccua/apollo-rest-utils/compare/1.0.3...1.0.4) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]: Guess you don't specify node... ([cba67e1](https://github.com/nrccua/apollo-rest-utils/commit/cba67e171074e51050261a275189a807741b5af0))
+* [E4E-30]: 1.0.3 ([6cb92fb](https://github.com/nrccua/apollo-rest-utils/commit/6cb92fb3c5a5c216f8bf00631604ee031abfa98d))
+
 ### [1.0.3](https://github.com/nrccua/apollo-rest-utils/compare/1.0.2...1.0.3) (2021-11-21)
 
 
