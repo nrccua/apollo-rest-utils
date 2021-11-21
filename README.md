@@ -63,6 +63,8 @@ const userSearch = (searchPattern: string) => {
 
 ## Releasing
 
+Checking in the dist folder is not necessary as it will be built upon npm install by the downstream project.
+
 After making any changes and merging them to main, please do the following:
 
 * Create a new branch from main and run `npm run update:version`

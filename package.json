@@ -50,7 +50,7 @@
     "url": "git+https://github.com/nrccua/apollo-rest-utils.git"
   },
   "scripts": {
-    "build": "npm run clean && tsc lib/**/*.ts --excludeFiles lib/**/*.test.ts --outDir dist --esModuleInterop --declaration",
+    "build": "npm run clean && tsc lib/**/*.ts lib/*.ts --excludeFiles lib/**/*.test.ts --outDir dist --esModuleInterop --declaration",
     "clean": "rm -rf dist",
     "clean:full": "npm run clean && rm -rf node_modules",
     "postinstall": "npm run build",

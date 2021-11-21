@@ -18,5 +18,6 @@
   "include": [
     "./**/*",
   ],
+  "resolveJsonModule": true,
   "target": "es5",
 }
