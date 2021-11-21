@@ -65,5 +65,5 @@
     "test:unit": "NODE_ENV=test jest --silent --coverage",
     "update:version": "standard-version"
   },
-  "version": "1.0.4"
+  "version": "1.0.5"
 }

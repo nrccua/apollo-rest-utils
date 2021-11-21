@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/nrccua/apollo-rest-utils/compare/1.0.4...1.0.5) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30] Specify node as the shell for the executable and chmod ([7775766](https://github.com/nrccua/apollo-rest-utils/commit/7775766850dd01ac6fbf23503b7908cc80e7b741))
+* [E4E-30]: 1.0.4 ([5526410](https://github.com/nrccua/apollo-rest-utils/commit/5526410bb34eb59b5ad66bef34f2508382072fd8))
+
 ### [1.0.4](https://github.com/nrccua/apollo-rest-utils/compare/1.0.3...1.0.4) (2021-11-21)
 
 
