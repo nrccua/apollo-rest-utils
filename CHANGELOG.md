@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/nrccua/apollo-rest-utils/compare/1.0.5...1.0.6) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]: Add Github actions for PRs ([7a84926](https://github.com/nrccua/apollo-rest-utils/commit/7a84926378790a268e8aec377a32676a69f1deac))
+* [E4E-30]: Helps if you export the functions too ([af3d09c](https://github.com/nrccua/apollo-rest-utils/commit/af3d09c21f970964360ede4ac9ae2c54f41d4a96))
+* [E4E-30]: 1.0.5 ([5f16758](https://github.com/nrccua/apollo-rest-utils/commit/5f16758dac3bd391490d18f0ff16b624be8bf5a0))
+
 ### [1.0.5](https://github.com/nrccua/apollo-rest-utils/compare/1.0.4...1.0.5) (2021-11-21)
 
 

@@ -1,0 +1,14 @@
+name: Auto approval for sync PRs without conflicts
+on:
+  pull_request:
+    types: [opened]
+jobs:
+  approve_syncs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve sync PRs
+        uses: nrccua/pr-approver@v1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label-list: sync
+          label-exclusion-list: conflicts,had conflicts,merge issues
