@@ -1,5 +1,6 @@
 {
   "author": "Adam Weeden <adam.weeden@encoura.org>",
+  "bin": "node dist/generateRoutes/index.js",
   "bugs": {
     "url": "https://github.com/nrccua/apollo-rest-utils/issues"
   },
@@ -43,7 +44,7 @@
     "graphql"
   ],
   "license": "MIT",
-  "main": "dist/generateRoutes/index.js",
+  "main": "dist/index.js",
   "name": "apollo-rest-utils",
   "repository": {
     "type": "git",
