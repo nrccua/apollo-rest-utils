@@ -51,7 +51,7 @@
     "url": "git+https://github.com/nrccua/apollo-rest-utils.git"
   },
   "scripts": {
-    "build": "npm run clean && tsc lib/**/*.ts lib/*.ts --excludeFiles lib/**/*.test.ts --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
+    "build": "npm run clean && tsc $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
     "clean": "rm -rf dist",
     "clean:full": "npm run clean && rm -rf node_modules",
     "postinstall": "npm run build",
