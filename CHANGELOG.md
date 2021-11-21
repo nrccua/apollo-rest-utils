@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.11](https://github.com/nrccua/apollo-rest-utils/compare/1.0.10...1.0.11) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]:ApolloClient<object> ([ae6db2a](https://github.com/nrccua/apollo-rest-utils/commit/ae6db2a5c13366b7df670b501b1d4f14460f8308))
+* [E4E-30]: 1.0.10 ([6bce871](https://github.com/nrccua/apollo-rest-utils/commit/6bce871f8c23f80affc1493a5f75463995e09203))
+
 ### [1.0.10](https://github.com/nrccua/apollo-rest-utils/compare/1.0.9...1.0.10) (2021-11-21)
 
 
