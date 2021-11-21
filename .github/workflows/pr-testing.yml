@@ -10,10 +10,8 @@ on:
 
 jobs:
   test:
-    name: Install dependencies, test, and deploy a PR build
+    name: Install dependencies and test
     runs-on: ubuntu-latest
-    env:
-      aws_s3_bucket: ${{ secrets.AWS_S3_BUCKET }}-pr-${{ github.event.number }}
     strategy:
       matrix:
         node: ["14"]
