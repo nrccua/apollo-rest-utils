@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.9](https://github.com/nrccua/apollo-rest-utils/compare/1.0.8...1.0.9) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]: Allow ApolloClient<any> for dowstream flexibility ([a8e0b0f](https://github.com/nrccua/apollo-rest-utils/commit/a8e0b0f8feba57b171fa6aaf40fc07e257cc0430))
+* [E4E-30]: 1.0.8 ([c2be2d5](https://github.com/nrccua/apollo-rest-utils/commit/c2be2d5722c6564e590449a63f5d20f71b319189))
+
 ### [1.0.8](https://github.com/nrccua/apollo-rest-utils/compare/1.0.7...1.0.8) (2021-11-21)
 
 
