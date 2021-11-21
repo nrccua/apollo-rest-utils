@@ -59,7 +59,8 @@ export function useRestMutation<
   TData = unknown,
   TVariables = OperationVariables,
   TContext = DefaultContext,
-  TCache extends ApolloCache<unknown> = ApolloCache<unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TCache extends ApolloCache<any> = ApolloCache<any>,
 >(
   mutation: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
   options: IEndpointOptions<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>> &
