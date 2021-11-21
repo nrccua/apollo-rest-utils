@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/nrccua/apollo-rest-utils/compare/1.0.1...1.0.2) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]: FIx the lack of a root index.js on build ([c464ba6](https://github.com/nrccua/apollo-rest-utils/commit/c464ba68f0d03e5afea5ce0f069413e848e4c21f))
+* [E4E-30]: Update changelog + version = 1.0.1 ([6e745be](https://github.com/nrccua/apollo-rest-utils/commit/6e745be765fcfebb400501dcfd567fa061064f49))
+
 ### [1.0.1](https://github.com/nrccua/apollo-rest-utils/compare/1.0.0...1.0.1) (2021-11-21)
 
 
