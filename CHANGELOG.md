@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/nrccua/apollo-rest-utils/compare/1.0.2...1.0.3) (2021-11-21)
+
+
+### Changes
+
+* [E4E-30]: Fix issue with no bin being generated on downstream ([391e872](https://github.com/nrccua/apollo-rest-utils/commit/391e87273a95f2303ada672578a53b24e769b18b))
+* [E4E-30]: 1.0.2 ([ea5ddff](https://github.com/nrccua/apollo-rest-utils/commit/ea5ddffab510578181cb9f66759dcf3751859be3))
+
 ### [1.0.2](https://github.com/nrccua/apollo-rest-utils/compare/1.0.1...1.0.2) (2021-11-21)
 
 
