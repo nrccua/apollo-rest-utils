@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // This file is NOT meant to be imported.
 // It is a helper file to generate @rest endpoint definitions
 // from a swagger.json file
@@ -149,7 +151,7 @@ async function main(): Promise<void> {
     const usage = 'apollo-rest-utils <swagger_file_or_url> <output_directory>';
     if (process.argv.length < 3) {
       console.log(usage);
-      throw new Error('No swagger.json URL provided as an argument');
+      throw new Error('No swagger file/URL provided as an argument');
     }
     if (process.argv.length < 4) {
       console.log(usage);
