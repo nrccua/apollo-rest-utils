@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.13](https://github.com/nrccua/apollo-rest-utils/compare/1.0.12...1.0.13) (2021-11-22)
+
+
+### Changes
+
+* [E4E-30]: Typo inception ([4fef9ae](https://github.com/nrccua/apollo-rest-utils/commit/4fef9ae4d34446801259ad4ea4992fbed1c6dcc2))
+* [E4E-30]: 1.0.12 ([17195db](https://github.com/nrccua/apollo-rest-utils/commit/17195db1caaea1f94c3586a644975fa2581e54bc))
+
+### [1.0.12](https://github.com/nrccua/apollo-rest-utils/compare/1.0.11...1.0.12) (2021-11-22)
+
+
+### Changes
+
+* [E4E-30]: Fix typo ([72a57dc](https://github.com/nrccua/apollo-rest-utils/commit/72a57dc81a3426811cfd680fd1398e934505ceb1))
+* [E4E-30]: 1.0.11 ([d6c1039](https://github.com/nrccua/apollo-rest-utils/commit/d6c1039ca24d04227e48edee6849b2d6eb97e9d5))
+
 ### [1.0.11](https://github.com/nrccua/apollo-rest-utils/compare/1.0.10...1.0.11) (2021-11-21)
 
 
