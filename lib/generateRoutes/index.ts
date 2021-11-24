@@ -54,7 +54,7 @@ export function normalizeName(name: string): string {
 }
 
 export function pathToType(endpointPath: string, isArray = false): string {
-  const result = `${_.camelCase(_.last(endpointPath.split('/').filter(x => !x.startsWith('{'))))}Response`;
+  const result = `${_.camelCase(normalizeName(endpointPath))}Response`;
   return `${isArray ? '[' : ''}${result.replace(result[0], result[0].toUpperCase())}${isArray ? ']' : ''}`;
 }
 
