@@ -19,16 +19,17 @@ function deleteBuildFolder(): void {
   }
 }
 
-function doTestImport(tsData: string): unknown {
+function doTestImport(tsData: string): void {
   const filename = `${randomUUID()}.ts`;
 
   fs.writeFileSync(path.join(buildFolder, filename), tsData);
 
-  // eslint-disable-next-line max-len
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, security/detect-non-literal-require, import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
-  const endpoints = require(`../../build/tests/${filename}`);
-  expect(endpoints).toBeTruthy(); // Probably a better test here, but I don't know what it would be
-  return endpoints;
+  expect(() => {
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, security/detect-non-literal-require, import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
+    const endpoints = require(`../../build/tests/${filename}`);
+    expect(endpoints).toBeTruthy(); // Probably a better test here, but I don't know what it would be
+  }).not.toThrow();
 }
 
 describe('generateTypescript', () => {
@@ -47,7 +48,7 @@ describe('generateTypescript', () => {
 
     const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
 
-    const tsData = generateTypescript(api, typeImport).replace('apollo-rest-utils', '../../lib');
+    const tsData = generateTypescript(api, typeImport).replace(/apollo-rest-utils/g, '../../lib');
 
     expect(tsData).toBeTruthy(); // Not empty, null, or undefined
 
@@ -70,8 +71,8 @@ describe('normalizeName', () => {
 describe('pathToType', () => {
   it.each([
     ['/login', 'LoginResponse'],
-    ['/high-schools/search', 'SearchResponse'],
-    ['/invitations/{studentKey}/users/{mentorEmail}', 'UsersResponse'],
+    ['/high-schools/search', 'HighSchoolsSearchResponse'],
+    ['/invitations/{studentKey}/users/{mentorEmail}', 'InvitationsByStudentkeyUsersByMentoremailResponse'],
   ])('path %s produces type name %s', (pathName, expectedTypeName) => {
     expect(pathToType(pathName)).toEqual(expectedTypeName);
   });

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.14](https://github.com/nrccua/apollo-rest-utils/compare/1.0.13...1.0.14) (2021-11-24)
+
+
+### Changes
+
+* [E4E-30]: Fix Response name generation + better tests ([e66d290](https://github.com/nrccua/apollo-rest-utils/commit/e66d290c350bcf22abfd650e79f55ef371447dc9))
+* [E4E-30]: 1.0.13 ([55ba637](https://github.com/nrccua/apollo-rest-utils/commit/55ba6373e2e3706af197fadf2ac6fe4fa8a266e3))
+
 ### [1.0.13](https://github.com/nrccua/apollo-rest-utils/compare/1.0.12...1.0.13) (2021-11-22)
 
 

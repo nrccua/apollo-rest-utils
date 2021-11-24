@@ -114,7 +114,7 @@ describe('useRestQuery Library', () => {
     const wrappedRestQuery = wrapRestClientQuery<'refreshToken'>();
 
     const { data } = await wrappedRestQuery({
-      client: clientMock as unknown as ApolloClient<unknown>,
+      client: clientMock as unknown as ApolloClient<object>,
       endpoint: dummyEndpoint,
       query: gql`
         query TestClientQuery($input: input) {
