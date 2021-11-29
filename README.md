@@ -25,7 +25,9 @@ with REST apis and Apollo in a TypeScript application.
 
 From the command line you can generate definitions for endpoints:
 
-`npx apollo-rest-utils <path_to_swagger_file_or_url> <output_directory_where_you_want_the_files>`
+```bash
+npx apollo-rest-utils <path_to_swagger_file_or_url> <output_directory_where_you_want_the_files> [optional_endpoint_id_to_use]
+```
 
 Then you can use those definitions to make GraphQL calls within an Apollo context:
 
@@ -60,6 +62,12 @@ const userSearch = (searchPattern: string) => {
   return data?.users ?? [];
 }
 ```
+
+## Endpoint IDs
+
+To facilitate using this with multiple endpoints, you must specify an endpoint
+id per endpoint. See
+[https://www.apollographql.com/docs/react/api/link/apollo-link-rest/#multiple-endpoints](https://www.apollographql.com/docs/react/api/link/apollo-link-rest/#multiple-endpoints)
 
 ## Releasing
 

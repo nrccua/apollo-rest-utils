@@ -52,6 +52,26 @@ describe('generateTypescript', () => {
 
     expect(tsData).toBeTruthy(); // Not empty, null, or undefined
 
+    expect(tsData.includes(', endpoint: "')).toBe(false);
+
+    doTestImport(tsData);
+  });
+
+  it('can generate endpoints with the optional endpoint id', async () => {
+    const apiPath = path.join(testSwaggerPath, 'OpenAPIV3WithRef.json');
+
+    const api = await SwaggerParser.validate(apiPath);
+
+    const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
+
+    const tsData = generateTypescript(api, typeImport, 'TEST').replace(/apollo-rest-utils/g, '../../lib');
+
+    expect(tsData).toBeTruthy(); // Not empty, null, or undefined
+
+    // Make sure we have an endpoint option for every rest method
+    expect(tsData.match(/[@]rest/g)).not.toBeUndefined();
+    expect(tsData.match(/[@]rest/g)?.length).toEqual(tsData.match(/, endpoint: "TEST"/g)?.length);
+
     doTestImport(tsData);
   });
 });

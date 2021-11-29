@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/nrccua/apollo-rest-utils/compare/1.0.14...1.1.0) (2021-11-29)
+
+
+### Changes
+
+* [E4E-30]: Add ability to specify an endpoint id ([dd01aea](https://github.com/nrccua/apollo-rest-utils/commit/dd01aea0daad0fbf64e7ee358c4a34d571456c82))
+* [E4E-30]: 1.0.14 ([191a478](https://github.com/nrccua/apollo-rest-utils/commit/191a47871b111b63aa9444538e5d45f3fcd9ab99))
+
 ### [1.0.14](https://github.com/nrccua/apollo-rest-utils/compare/1.0.13...1.0.14) (2021-11-24)
 
 
