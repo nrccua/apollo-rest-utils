@@ -78,6 +78,10 @@ id per endpoint. See
 This link allows you to access the REST API's response headers within the
 `data` object that comes back from Apollo Client.
 
+NOTE: Since GraphQL only accepts field names written in `camelCase`, the headers
+should be requested in camel case format. I.e. if your REST API returns a
+`total-count` header, you'll want to ask for it using `totalCount`.
+
 #### `HeadersLink` Setup
 
 ```ts
@@ -108,9 +112,9 @@ const { data } = wrapRestQuery<'something'>()(
         fieldC
       }
       headers {
-        header1
-        header2
-        header3
+        nextOffset
+        totalCount
+        totalPages
       }
     }
   `,
