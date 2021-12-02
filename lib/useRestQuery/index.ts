@@ -42,7 +42,7 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
     });
 
     if (!(selectionsIncludeHeaders && definition.selectionSet.selections.length === 2)) {
-      throw new InvalidQueryError('Query must contain exactly one selection, or one selection with headers (if using the headersLink)', query, endpoint);
+      throw new InvalidQueryError('Query must contain exactly one selection, or one selection with headers (if using the HeadersLink)', query, endpoint);
     }
   }
 

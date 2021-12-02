@@ -1,3 +1,3 @@
-export * from './headersLink';
+export * from './HeadersLink';
 export * from './types';
 export * from './useRestQuery';
