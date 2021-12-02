@@ -75,7 +75,12 @@ id per endpoint. See
 
 ### `HeadersLink`
 
-```
+This link allows you to access the REST API's response headers within the
+`data` object that comes back from Apollo Client.
+
+#### `HeadersLink` Setup
+
+```ts
 import { RestLink } from 'apollo-link-rest';
 import { HeadersLink } from 'apollo-rest-utils';
 
@@ -88,6 +93,37 @@ new ApolloClient({
   link: ApolloLink.from([headersLink, restLink]),
   ...
 });
+```
+
+#### `HeadersLink` Usage
+
+```ts
+const { data } = wrapRestQuery<'something'>()(
+  gql`
+    query SomethingQuery($id: String!) {
+      something(id: $id) {
+        _id
+        fieldA
+        fieldB
+        fieldC
+      }
+      headers {
+        header1
+        header2
+        header3
+      }
+    }
+  `,
+  {
+    endpoint: REST.GET.SOMETHING,
+    variables: {
+      id,
+    },
+  },
+);
+
+console.log(data?.something); // response data
+console.log(data?.headers); // response headers
 ```
 
 ## Releasing
