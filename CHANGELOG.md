@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/nrccua/apollo-rest-utils/compare/1.1.0...1.1.1) (2021-12-03)
+
+
+### Changes
+
+* [E4E-0]: Account for Swagger 2 differences in file generation ([5027a5e](https://github.com/nrccua/apollo-rest-utils/commit/5027a5e59a2e9a1be84a3dbde1f7009a727717f4))
+* Merge pull request #8 from nrccua/E4E-30 ([35f0cdf](https://github.com/nrccua/apollo-rest-utils/commit/35f0cdfe80bce8bf193fbd13a6b28e70607e7a98)), closes [#8](https://github.com/nrccua/apollo-rest-utils/issues/8)
+* [E4E-30]: 1.1.0 ([e1ba57b](https://github.com/nrccua/apollo-rest-utils/commit/e1ba57baef0c994981cc46ad558bc2576f6f0008))
+* Merge pull request #7 from nrccua/E4E-30 ([43d8873](https://github.com/nrccua/apollo-rest-utils/commit/43d887310cf42351d04f4ef0224e934ebb2ca2b2)), closes [#7](https://github.com/nrccua/apollo-rest-utils/issues/7)
+* Merge pull request #6 from nrccua/E4E-30 ([967c124](https://github.com/nrccua/apollo-rest-utils/commit/967c1246d0532ce397193cadc223ea84403b4d08)), closes [#6](https://github.com/nrccua/apollo-rest-utils/issues/6)
+* Merge pull request #5 from nrccua/E4E-30 ([3ebd56f](https://github.com/nrccua/apollo-rest-utils/commit/3ebd56f0e219427a79f42412dcccc116c77e6544)), closes [#5](https://github.com/nrccua/apollo-rest-utils/issues/5)
+* Merge pull request #4 from nrccua/E4E-30 ([7a655df](https://github.com/nrccua/apollo-rest-utils/commit/7a655df9628fbd3d7eb3e28ae6d0291551ae9f2c)), closes [#4](https://github.com/nrccua/apollo-rest-utils/issues/4)
+* Merge pull request #3 from nrccua/E4E-30 ([2225f29](https://github.com/nrccua/apollo-rest-utils/commit/2225f293b361190bca7042a803359fbfc0627a56)), closes [#3](https://github.com/nrccua/apollo-rest-utils/issues/3)
+* Merge pull request #2 from nrccua/E4E-30 ([96c0a20](https://github.com/nrccua/apollo-rest-utils/commit/96c0a20c048c270dd5b64ed92a041aeeac5495a7)), closes [#2](https://github.com/nrccua/apollo-rest-utils/issues/2)
+* Merge pull request #1 from nrccua/E4E-30 ([29cd838](https://github.com/nrccua/apollo-rest-utils/commit/29cd8384f0c155c56a2db9f74a1a62739a56b54c)), closes [#1](https://github.com/nrccua/apollo-rest-utils/issues/1)
+
 ## [1.1.0](https://github.com/nrccua/apollo-rest-utils/compare/1.0.14...1.1.0) (2021-11-29)
 
 
