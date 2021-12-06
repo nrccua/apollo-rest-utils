@@ -16,6 +16,7 @@ import {
   useQuery,
 } from '@apollo/client';
 import { DirectiveNode, FieldNode, OperationDefinitionNode } from 'graphql';
+import { get } from 'lodash';
 
 import { IEndpointOptions, getSchemaField, Input, InvalidQueryError, IRestEndpoint, NamedGQLResult } from '../types';
 
@@ -33,7 +34,16 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
   }
 
   if (definition.selectionSet.selections.length !== 1) {
-    throw new InvalidQueryError('Query must contain exactly one selection', query, endpoint);
+    let selectionsIncludeHeaders = false;
+    definition.selectionSet.selections.forEach((selection): void => {
+      if (get(selection, 'name.value') === 'headers') {
+        selectionsIncludeHeaders = true;
+      }
+    });
+
+    if (!(selectionsIncludeHeaders && definition.selectionSet.selections.length === 2)) {
+      throw new InvalidQueryError('Query must contain exactly one selection, or one selection with headers (if using the HeadersLink)', query, endpoint);
+    }
   }
 
   const selection = definition.selectionSet.selections[0] as FieldNode;

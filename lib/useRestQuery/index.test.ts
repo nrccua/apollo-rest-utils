@@ -164,6 +164,19 @@ describe('validateQueryAgainstEndpoint', () => {
     expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).not.toThrowError();
   });
 
+  it('should not throw an error for a valid query with headers', () => {
+    const query = gql`
+      query TestQuery($input: input) {
+        refreshToken(input: $input) {
+          sessionToken
+        }
+        headers
+      }
+    `;
+
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).not.toThrowError();
+  });
+
   it('should throw an error for a query with no definitions', () => {
     const query = { definitions: [], kind: 'Document' } as DocumentNode;
 

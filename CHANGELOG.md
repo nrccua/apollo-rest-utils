@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/nrccua/apollo-rest-utils/compare/1.1.1...1.2.0) (2021-12-06)
+
+
+### Changes
+
+* [E4E-0]: Flesh out unit tests ([5668f6b](https://github.com/nrccua/apollo-rest-utils/commit/5668f6b24a25e394865225ac3f8e0dd013a3007f))
+* Merge branch 'main' into feature/headersLink ([991c60f](https://github.com/nrccua/apollo-rest-utils/commit/991c60f103428a30d1c24690a537fe0bc46b6dab))
+* Merge pull request #10 from nrccua/fix/swagger_2_wordpress_fixes ([eea1539](https://github.com/nrccua/apollo-rest-utils/commit/eea1539cb6684a543a5a12b4143405f445b7fe29)), closes [#10](https://github.com/nrccua/apollo-rest-utils/issues/10)
+* [E4E-0]: 1.1.1 ([81b1e1d](https://github.com/nrccua/apollo-rest-utils/commit/81b1e1d9c262314f91501f920e2ed3e24f7da125))
+* [E4E-14]: Add eslint as a devDependency ([66613e4](https://github.com/nrccua/apollo-rest-utils/commit/66613e40b67d7151d414f9123333b1529af4c65b))
+
 ### [1.1.1](https://github.com/nrccua/apollo-rest-utils/compare/1.1.0...1.1.1) (2021-12-03)
 
 
