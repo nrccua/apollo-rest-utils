@@ -14,7 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["14"]
+        node:
+        - 12
+        - 14
+        - 16
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,7 +38,8 @@ jobs:
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
             ${{ runner.os }}-
-      - run: npm i
+      - run: rm -rf package-lock.json # Remove the package-lock so that all versions of node can be tested
+      - run: npm i --legacy-peer-deps
       - run: npm run test
       - name: Build
         run: npm run build
