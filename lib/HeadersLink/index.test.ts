@@ -1,4 +1,5 @@
 import { NextLink, Operation } from '@apollo/client';
+
 import HeadersLink from '.';
 
 describe('HeadersLink', () => {

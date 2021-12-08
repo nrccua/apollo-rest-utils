@@ -21,6 +21,10 @@ export interface IRestEndpoint<ResponseType, RequestType = unknown> {
   responseSchema: RestEndpointSchema;
 }
 
+export type RestResponse<T> = T extends IRestEndpoint<infer U, unknown> ? U : never;
+
+export type RestRequest<T> = T extends IRestEndpoint<unknown, infer U> ? U : never;
+
 export type Input<T> = T | { input: T };
 
 export interface IEndpointOptions<T, U> {

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/nrccua/apollo-rest-utils/compare/1.2.0...1.2.1) (2021-12-08)
+
+
+### Changes
+
+* [E4E-58]: Add helper rest type extractors ([fc0fbad](https://github.com/nrccua/apollo-rest-utils/commit/fc0fbad7435a5217ade6857bd6be006bfd8e000a))
+* Merge pull request #9 from nrccua/feature/headersLink ([239ebd2](https://github.com/nrccua/apollo-rest-utils/commit/239ebd21ad8666851ad673e6e5203bb315db5a02)), closes [#9](https://github.com/nrccua/apollo-rest-utils/issues/9)
+* [E4E-0]: 1.2.0 ([ebc7c39](https://github.com/nrccua/apollo-rest-utils/commit/ebc7c39cfc44ec99fa92ef274f85a0b4ff3b39dc))
+
 ## [1.2.0](https://github.com/nrccua/apollo-rest-utils/compare/1.1.1...1.2.0) (2021-12-06)
 
 
