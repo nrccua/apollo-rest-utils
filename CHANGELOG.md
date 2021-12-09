@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/nrccua/apollo-rest-utils/compare/1.2.1...1.2.2) (2021-12-09)
+
+
+### Changes
+
+* [E4E-0]: Only support 14 + 16 ([71f44cc](https://github.com/nrccua/apollo-rest-utils/commit/71f44cc8622bf69e8caa8951e30d316edf4bcdd4))
+* [E4E-0]: Update package-lock.json with changes from latest eslint-config ([de1beba](https://github.com/nrccua/apollo-rest-utils/commit/de1beba076ccc682eb05517ca35d8cbd8f55b260))
+* [E4E-0]: Try to allow the package to be used across node versions ([daf6b75](https://github.com/nrccua/apollo-rest-utils/commit/daf6b758bd7decaaf515d4d48d3abf2fd176bcd9))
+* [E4E-58]: 1.2.1 ([e8bf334](https://github.com/nrccua/apollo-rest-utils/commit/e8bf334e1398e1a5ba520052b7c8063e475430f8))
+
 ### [1.2.1](https://github.com/nrccua/apollo-rest-utils/compare/1.2.0...1.2.1) (2021-12-08)
 
 
