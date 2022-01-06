@@ -12,7 +12,7 @@ import path from 'path';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import _, { first } from 'lodash';
 import { OpenAPI, OpenAPIV3 } from 'openapi-types';
-import openapiTS, { ReferenceObject, ResponseObject, SchemaObject } from 'openapi-typescript';
+import openapiTS, { ParameterObject, ReferenceObject, ResponseObject, SchemaObject } from 'openapi-typescript';
 import prettier from 'prettier';
 
 import { RestEndpointSchema } from '../types';
@@ -37,7 +37,11 @@ export function getResponseSchema(properties?: {
       'properties' in properties[p]
         ? { [p]: getResponseSchema((properties[p] as OpenAPIV3.SchemaObject).properties) } // eslint-disable-this-line @typescript-eslint/no-unsafe-assignment
         : 'items' in properties[p]
-        ? { [p]: getResponseSchema(((properties[p] as OpenAPIV3.ArraySchemaObject).items as OpenAPIV3.SchemaObject).properties) }
+        ? {
+            [p]: getResponseSchema(
+              ((properties[p] as OpenAPIV3.ArraySchemaObject).items as OpenAPIV3.SchemaObject).properties,
+            ),
+          }
         : p,
     )
     .filter(p =>
@@ -58,6 +62,36 @@ export function normalizeName(name: string): string {
 export function pathToType(endpointPath: string, isArray = false): string {
   const result = `${_.camelCase(normalizeName(endpointPath))}Response`;
   return `${isArray ? '[' : ''}${result.replace(result[0], result[0].toUpperCase())}${isArray ? ']' : ''}`;
+}
+
+export function typeOfParam(param: ParameterObject): string {
+  return param.schema &&
+    'type' in param.schema &&
+    param.schema?.type &&
+    ['number', 'string'].includes(param.schema?.type)
+    ? param.schema?.type
+    : 'any';
+}
+
+export function typeObjectFromParams(
+  params: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
+): string | undefined {
+  if (params.length === 0) {
+    return undefined;
+  }
+
+  let typeString = '{ ';
+
+  params.forEach(p => {
+    const paramObject = p as ParameterObject;
+    if (paramObject.name) {
+      typeString += `${_.camelCase(paramObject.name)}: ${typeOfParam(paramObject)}; `;
+    }
+  });
+
+  typeString += ' }';
+
+  return typeString;
 }
 
 export async function generateTypes(apiPath: string, filePath: string): Promise<string> {
@@ -101,7 +135,9 @@ export function generateTypescript(api: OpenAPI.Document, typeImportLocation: st
           responseBody += `['content']`;
           if (responseObject?.content?.['application/json']) {
             responseBody += `['application/json']`;
-            schema = responseObject.content['application/json'].schema as OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject;
+            schema = responseObject.content['application/json'].schema as
+              | OpenAPIV3.ReferenceObject
+              | OpenAPIV3.SchemaObject;
           }
         } else if ('schema' in responseObject) {
           responseBody += `['schema']`;
@@ -117,16 +153,26 @@ export function generateTypescript(api: OpenAPI.Document, typeImportLocation: st
       }
       const requestBodyObject = endpointObject.requestBody as OpenAPIV3.RequestBodyObject;
       const contentKeys = Object.keys(requestBodyObject?.content ?? {});
+      const queryPathParams =
+        endpointObject.parameters?.filter(p => 'in' in p && ['path', 'query'].includes(p.in)) ?? [];
+      const queryPathParamsObject = typeObjectFromParams(queryPathParams);
       const bodyParam = first(endpointObject.parameters?.filter(p => 'name' in p && p.name.toLowerCase() === 'body'));
       // eslint-disable-next-line no-nested-ternary
       const requestBody = contentKeys.includes('application/json')
         ? // OpenAPI 3 way
-          `paths['${endpointPath}']['${method}']['requestBody']['content']['application/json']`
+          `paths['${endpointPath}']['${method}']['requestBody']['content']['application/json']${
+            queryPathParamsObject ? ` & ${queryPathParamsObject}` : ''
+          }`
         : // Swagger 2 way
         bodyParam
-        ? `paths['${endpointPath}']['${method}']['parameters']['body']['body']`
-        : undefined;
-      const headers = endpointObject.parameters?.filter(p => 'in' in p && p.in === 'header').map(p => p as OpenAPIV3.ParameterObject) ?? [];
+        ? `paths['${endpointPath}']['${method}']['parameters']['body']['body']${
+            queryPathParamsObject ? ` & ${queryPathParamsObject}` : ''
+          }`
+        : queryPathParamsObject;
+      const headers =
+        endpointObject.parameters
+          ?.filter(p => 'in' in p && p.in === 'header')
+          .map(p => p as OpenAPIV3.ParameterObject) ?? [];
       routes[method as Uppercase<OpenAPIV3.HttpMethods>][
         normalizeName(endpointPath)
       ] = `${`{ gql: '@rest(method: "${method.toUpperCase()}", path: "${addArgsToPath(
@@ -134,11 +180,15 @@ export function generateTypescript(api: OpenAPI.Document, typeImportLocation: st
         endpointObject.parameters as OpenAPIV3.ParameterObject[] | undefined,
       )}", type: "${pathToType(endpointPath, isArray)}"${endpointId ? `, endpoint: "${endpointId}"` : ''})', `}${
         headers?.length > 0
-          ? `headers: [${headers.map(h => JSON.stringify({ description: h.description, name: h.name, required: h.required, schema: h.schema })).join(',\n')}],`
+          ? `headers: [${headers
+              .map(h =>
+                JSON.stringify({ description: h.description, name: h.name, required: h.required, schema: h.schema }),
+              )
+              .join(',\n')}],`
           : ''
-      }${responseSchema ? `responseSchema: ${JSON.stringify(responseSchema)},\n` : ''}} as IRestEndpoint<${responseBody}${
-        requestBody ? `,${requestBody}` : ''
-      }>,`;
+      }${
+        responseSchema ? `responseSchema: ${JSON.stringify(responseSchema)},\n` : ''
+      }} as IRestEndpoint<${responseBody}${requestBody ? `,${requestBody}` : ''}>,`;
     });
   });
   generatedTSEndpoints += 'const ROUTES = {\n';

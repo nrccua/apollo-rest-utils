@@ -26,7 +26,10 @@ jest.mock('@apollo/client', () => ({
 describe('useRestQuery Library', () => {
   const useMutationMock = useMutation as jest.Mock;
   const useQueryMock = useQuery as jest.Mock;
-  const dummyEndpoint = { gql: '@rest(method: "get", path: "test")' } as IRestEndpoint<{ sessionToken: string }, { testInput: string }>;
+  const dummyEndpoint = { gql: '@rest(method: "get", path: "test")' } as IRestEndpoint<
+    { sessionToken: string },
+    { testInput: string }
+  >;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -131,7 +134,8 @@ describe('useRestQuery Library', () => {
     expect(data?.refreshToken.sessionToken).toBe(testToken);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])?.query as DocumentNode;
+    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])
+      ?.query as DocumentNode;
 
     // Make sure our @rest gql got injected
     expect(print(generatedNode)).toContain(dummyEndpoint.gql);
@@ -139,10 +143,10 @@ describe('useRestQuery Library', () => {
 });
 
 describe('validateQueryAgainstEndpoint', () => {
-  const dummyEndpoint = { gql: '@rest(method: "get", path: "test")', responseSchema: ['sessionToken'] } as IRestEndpoint<
-    { sessionToken: string },
-    { testInput: string }
-  >;
+  const dummyEndpoint = {
+    gql: '@rest(method: "get", path: "test")',
+    responseSchema: ['sessionToken'],
+  } as IRestEndpoint<{ sessionToken: string }, { testInput: string }>;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -180,22 +184,37 @@ describe('validateQueryAgainstEndpoint', () => {
   it('should throw an error for a query with no definitions', () => {
     const query = { definitions: [], kind: 'Document' } as DocumentNode;
 
-    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query must contain exactly one definition');
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
+      'Query must contain exactly one definition',
+    );
   });
 
   it('should throw an error for a query with a non-operation definitions', () => {
-    const query = { definitions: [{ kind: 'ScalarTypeDefinition', name: { kind: 'Name', value: 'NULL' } }], kind: 'Document' } as DocumentNode;
+    const query = {
+      definitions: [{ kind: 'ScalarTypeDefinition', name: { kind: 'Name', value: 'NULL' } }],
+      kind: 'Document',
+    } as DocumentNode;
 
-    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query definition must be an operation');
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
+      'Query definition must be an operation',
+    );
   });
 
   it('should throw and error with an empty selections array', () => {
     const query: DocumentNode = {
-      definitions: [{ kind: 'OperationDefinition', operation: 'query', selectionSet: { kind: 'SelectionSet', selections: [] as readonly SelectionNode[] } }],
+      definitions: [
+        {
+          kind: 'OperationDefinition',
+          operation: 'query',
+          selectionSet: { kind: 'SelectionSet', selections: [] as readonly SelectionNode[] },
+        },
+      ],
       kind: 'Document',
     };
 
-    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query must contain exactly one selection');
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
+      'Query must contain exactly one selection',
+    );
   });
 
   it('should throw and error with a non-Field selection', () => {
@@ -204,7 +223,10 @@ describe('validateQueryAgainstEndpoint', () => {
         {
           kind: 'OperationDefinition',
           operation: 'query',
-          selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'NULL' } }] as readonly SelectionNode[] },
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'NULL' } }] as readonly SelectionNode[],
+          },
         },
       ],
       kind: 'Document',
@@ -220,7 +242,9 @@ describe('validateQueryAgainstEndpoint', () => {
       }
     `;
 
-    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query selection must contain at least one value to return');
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
+      'Query selection must contain at least one value to return',
+    );
   });
 
   it('should throw an error for a query with a bad field', () => {
@@ -232,6 +256,8 @@ describe('validateQueryAgainstEndpoint', () => {
       }
     `;
 
-    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query contains invalid fields: test');
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
+      'Query contains invalid fields: test',
+    );
   });
 });
