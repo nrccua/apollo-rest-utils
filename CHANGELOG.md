@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/nrccua/apollo-rest-utils/compare/1.4.0...1.4.1) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Add Input to body when combined with path/query params ([a57478f](https://github.com/nrccua/apollo-rest-utils/commit/a57478fcb59eba26f18599df20909c6faab768ef))
+* [E4E-87]: 1.4.0 (for real this time) ([66aa604](https://github.com/nrccua/apollo-rest-utils/commit/66aa604f9e4230e59da19781ae4f74f870917679))
+
 ## [1.4.0](https://github.com/nrccua/apollo-rest-utils/compare/1.3.3...1.4.0) (2022-01-07)
 
 
