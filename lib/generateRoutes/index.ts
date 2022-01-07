@@ -85,7 +85,9 @@ export function typeObjectFromParams(
   params.forEach(p => {
     const paramObject = p as ParameterObject;
     if (paramObject.name) {
-      typeString += `${_.camelCase(paramObject.name)}: ${typeOfParam(paramObject)}; `;
+      typeString += `${_.camelCase(paramObject.name)}${
+        paramObject.required || paramObject.in === 'path' ? '' : '?'
+      }: ${typeOfParam(paramObject)}; `;
     }
   });
 
