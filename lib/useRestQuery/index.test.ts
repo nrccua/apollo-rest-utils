@@ -78,6 +78,44 @@ describe('useRestQuery Library', () => {
     expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
 
+  it('wrapRestMutation should create a function that allows an empty input variable', async () => {
+    const testToken = 'TEST_TOKEN';
+    const mockResult = {
+      called: true,
+      client: new MockApolloClient() as unknown as ApolloClient<unknown>,
+      data: { refreshToken: { sessionToken: testToken } },
+      loading: false,
+    };
+
+    useMutationMock.mockReturnValue([async (): Promise<typeof mockResult> => Promise.resolve(mockResult), mockResult]);
+
+    const wrappedRestMutation = wrapRestMutation<'refreshToken'>();
+    const [refreshToken] = wrappedRestMutation(
+      gql`
+        query TestMutation($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      { endpoint: dummyEndpoint },
+    );
+    const result = await refreshToken({
+      variables: {
+        input: {},
+        testInput: 'test',
+      },
+    });
+
+    expect(result.data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useMutationMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
+  });
+
   it('wrapRestQuery should create a function that returns results via useQuery', () => {
     const testToken = 'TEST_TOKEN';
     useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
@@ -94,6 +132,37 @@ describe('useRestQuery Library', () => {
       {
         endpoint: dummyEndpoint,
         variables: {
+          testInput: 'test',
+        },
+      },
+    );
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useQueryMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
+  });
+
+  it('wrapRestQuery should create a function that allows an empty input variable', () => {
+    const testToken = 'TEST_TOKEN';
+    useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
+    const { data } = wrappedRestQuery(
+      gql`
+        query TestQuery($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      {
+        endpoint: dummyEndpoint,
+        variables: {
+          input: {},
           testInput: 'test',
         },
       },
@@ -127,6 +196,40 @@ describe('useRestQuery Library', () => {
         }
       `,
       variables: {
+        testInput: 'test',
+      },
+    });
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])
+      ?.query as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
+  });
+
+  it('wrapRestClientQuery should create a function that allows an empty input variable', async () => {
+    const testToken = 'TEST_TOKEN';
+    const clientMock = new MockApolloClient();
+
+    clientMock.query.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestClientQuery<'refreshToken'>();
+
+    const { data } = await wrappedRestQuery({
+      client: clientMock as unknown as ApolloClient<object>,
+      endpoint: dummyEndpoint,
+      query: gql`
+        query TestClientQuery($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      variables: {
+        input: {},
         testInput: 'test',
       },
     });
