@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.3](https://github.com/nrccua/apollo-rest-utils/compare/1.3.2...1.3.3) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Finally getting these input types to work + tests ([e52136b](https://github.com/nrccua/apollo-rest-utils/commit/e52136b34233105cab091a889389c6d5d0e9de20))
+* [E4E-87]: 1.3.2 ([b2d38d5](https://github.com/nrccua/apollo-rest-utils/commit/b2d38d5655eca628775cf63b7da2e20c2b2b1670))
+
 ### [1.3.2](https://github.com/nrccua/apollo-rest-utils/compare/1.3.1...1.3.2) (2022-01-07)
 
 

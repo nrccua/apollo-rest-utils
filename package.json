@@ -69,5 +69,5 @@
     "update:version:major": "standard-version --release-as major",
     "update:version:minor": "standard-version --release-as minor"
   },
-  "version": "1.3.2"
+  "version": "1.3.3"
 }
