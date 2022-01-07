@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/nrccua/apollo-rest-utils/compare/1.3.3...1.4.0) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Allow empty result selections for mutations ([874370d](https://github.com/nrccua/apollo-rest-utils/commit/874370db6e74bc67e651ad1284bf876aedd26bd6))
+* [E4E-87]: 1.4.0 ([ba62579](https://github.com/nrccua/apollo-rest-utils/commit/ba62579a5b10ff5989dc0e755b0d27649716ac80))
+* [E4E-87]: Allow for empty selectionSet on mutations, add some debug logging ([c4d128a](https://github.com/nrccua/apollo-rest-utils/commit/c4d128a2ba6573b7d07866bf65a2ca56557f22e9))
+* [E4E-87]: Update libraries; do some lint fixes ([5431c56](https://github.com/nrccua/apollo-rest-utils/commit/5431c56acee25b948edaccf85630d9bfdb78bfec))
+* [E4E-87]: 1.3.3 ([b5d8961](https://github.com/nrccua/apollo-rest-utils/commit/b5d896118af5f7767c1a17b27b1adfe288dc1002))
+
 ### [1.3.3](https://github.com/nrccua/apollo-rest-utils/compare/1.3.2...1.3.3) (2022-01-07)
 
 ### Changes
