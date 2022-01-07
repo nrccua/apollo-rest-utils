@@ -16,6 +16,7 @@ import {
   useQuery,
 } from '@apollo/client';
 import { DirectiveNode, FieldNode, OperationDefinitionNode } from 'graphql';
+import { print } from 'graphql/language/printer';
 import { get } from 'lodash';
 
 import { IEndpointOptions, getSchemaField, Input, InvalidQueryError, IRestEndpoint, NamedGQLResult } from '../types';
@@ -41,9 +42,12 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
       }
     });
 
-    if (!(selectionsIncludeHeaders && definition.selectionSet.selections.length === 2)) {
+    if (
+      definition.operation === 'query' &&
+      !(selectionsIncludeHeaders && definition.selectionSet.selections.length === 2)
+    ) {
       throw new InvalidQueryError(
-        'Query must contain exactly one selection, or one selection with headers (if using the HeadersLink)',
+        'Query must contain exactly one selection, or one selection with headers (if using the HeadersLink). Did you mean to do a mutation?',
         query,
         endpoint,
       );
@@ -98,6 +102,8 @@ export function useRestMutation<
     directives.push(dummyDirectives[0]);
   }
 
+  // eslint-disable-next-line no-console
+  console.debug('useRestMutation', { mutation: print(mutation), options });
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useMutation<NamedGQLResult<TName, TData>, Input<TVariables>, TContext, TCache>(
     mutation,
@@ -165,6 +171,8 @@ export function useRestQuery<TName extends string, TData, TVariables>(
     directives.push(dummyDirectives[0]);
   }
 
+  // eslint-disable-next-line no-console, sort-keys
+  console.debug('useRestQuery', { query: print(query), options });
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery<NamedGQLResult<TName, TData>, Input<TVariables>>(
     query,
@@ -224,6 +232,9 @@ export function useRestClientQuery<TName extends string, TData, TVariables>(
       .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
   }
+
+  // eslint-disable-next-line no-console, sort-keys
+  console.debug('useRestClientQuery', { query: print(options.query), options });
 
   return options.client.query<NamedGQLResult<TName, TData>, TVariables>(options);
 }
