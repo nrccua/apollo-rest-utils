@@ -27,9 +27,12 @@ with REST apis and Apollo in a TypeScript application.
 
 From the command line you can generate definitions for endpoints:
 
+ <!-- markdownlint-capture -->
+ <!-- markdownlint-disable MD013 -->
 ```bash
-npx apollo-rest-utils <path_to_swagger_file_or_url> <output_directory_where_you_want_the_files> [optional_endpoint_id_to_use]
+npx apollo-rest-utils <path_to_swagger_file_or_url> <output_directory_where_you_want_the_files> [optional_endpoint_id_to_use] 
 ```
+<!-- markdownlint-restore -->
 
 Then you can use those definitions to make GraphQL calls within an Apollo context:
 
