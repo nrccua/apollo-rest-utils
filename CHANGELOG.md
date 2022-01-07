@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/nrccua/apollo-rest-utils/compare/1.2.2...1.3.0) (2022-01-06)
+
+
+### Changes
+
+* [E4E-87]: Update to fix missing path params when a body is specified ([655fd4c](https://github.com/nrccua/apollo-rest-utils/commit/655fd4c3ae23df53d4e0bc1dfd3a4d9c7cf6d3fd))
+* Merge pull request #12 from nrccua/feature/make_cross_node_compatible ([155b717](https://github.com/nrccua/apollo-rest-utils/commit/155b717ba0f3bb02f750d40723ab479a9fe81cac)), closes [#12](https://github.com/nrccua/apollo-rest-utils/issues/12)
+* [E4E-0]: 1.2.2 ([749db93](https://github.com/nrccua/apollo-rest-utils/commit/749db93999d6d7e9e9840abfcc311061ac700fdd))
+* Merge pull request #11 from nrccua/feature/rest_type_helpers ([d0335a5](https://github.com/nrccua/apollo-rest-utils/commit/d0335a5becaa52a722570103cfd5aed36041b973)), closes [#11](https://github.com/nrccua/apollo-rest-utils/issues/11)
+
 ### [1.2.2](https://github.com/nrccua/apollo-rest-utils/compare/1.2.1...1.2.2) (2021-12-09)
 
 

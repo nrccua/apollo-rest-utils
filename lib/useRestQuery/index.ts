@@ -42,7 +42,11 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
     });
 
     if (!(selectionsIncludeHeaders && definition.selectionSet.selections.length === 2)) {
-      throw new InvalidQueryError('Query must contain exactly one selection, or one selection with headers (if using the HeadersLink)', query, endpoint);
+      throw new InvalidQueryError(
+        'Query must contain exactly one selection, or one selection with headers (if using the HeadersLink)',
+        query,
+        endpoint,
+      );
     }
   }
 
@@ -57,10 +61,18 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
 
   const subFields = selection.selectionSet.selections.map(s => (s as FieldNode).name.value);
 
-  const badFields = subFields.filter(fieldName => endpoint.responseSchema !== undefined && getSchemaField(endpoint.responseSchema, fieldName) === undefined);
+  const badFields = subFields.filter(
+    fieldName =>
+      endpoint.responseSchema !== undefined && getSchemaField(endpoint.responseSchema, fieldName) === undefined,
+  );
 
   if (badFields.length > 0) {
-    throw new InvalidQueryError(`Query contains invalid fields: ${badFields.join(', ')}`, query, endpoint, endpoint.responseSchema);
+    throw new InvalidQueryError(
+      `Query contains invalid fields: ${badFields.join(', ')}`,
+      query,
+      endpoint,
+      endpoint.responseSchema,
+    );
   }
 }
 
@@ -77,10 +89,12 @@ export function useRestMutation<
     MutationHookOptions<NamedGQLResult<TName, TData>, TVariables, TContext>,
 ): MutationTuple<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>, TContext, TCache> {
   validateQueryAgainstEndpoint(mutation, options.endpoint);
-  const directives = (mutation.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+  const directives = (mutation.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+    .directives as DirectiveNode[];
   if (directives.length === 0) {
     const dummyGQL = gql`query a($c: any) { b(c: $c) ${options.endpoint.gql} {d} }`;
-    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+      .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
   }
 
@@ -119,8 +133,13 @@ export function useRestMutation<
  *`   const uid = result.user.uid; // This is properly typed!`
  */
 export function wrapRestMutation<TName extends string>() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <TData = unknown, TVariables = OperationVariables, TContext = DefaultContext, TCache extends ApolloCache<any> = ApolloCache<any>>(
+  return <
+    TData = unknown,
+    TVariables = OperationVariables,
+    TContext = DefaultContext,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    TCache extends ApolloCache<any> = ApolloCache<any>,
+  >(
     mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options: IEndpointOptions<TData, TVariables> & MutationHookOptions<TData, TVariables, TContext>,
   ): MutationTuple<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>, TContext, TCache> =>
@@ -133,18 +152,24 @@ export function wrapRestMutation<TName extends string>() {
 
 export function useRestQuery<TName extends string, TData, TVariables>(
   query: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
-  options: IEndpointOptions<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>> & QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>,
+  options: IEndpointOptions<NamedGQLResult<TName, TData>, TVariables | Input<TVariables>> &
+    QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>,
 ): QueryResult<NamedGQLResult<TName, TData>, TVariables> {
   validateQueryAgainstEndpoint(query, options.endpoint);
-  const directives = (query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+  const directives = (query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+    .directives as DirectiveNode[];
   if (directives.length === 0) {
     const dummyGQL = gql`query a($c: any) { b(c: $c) ${options.endpoint.gql} {d} }`;
-    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+      .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return useQuery<NamedGQLResult<TName, TData>, TVariables>(query, options as QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>);
+  return useQuery<NamedGQLResult<TName, TData>, TVariables>(
+    query,
+    options as QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>,
+  );
 }
 
 /**
@@ -191,10 +216,12 @@ export function useRestClientQuery<TName extends string, TData, TVariables>(
     QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<object> },
 ): Promise<ApolloQueryResult<NamedGQLResult<TName, TData>>> {
   validateQueryAgainstEndpoint(options.query, options.endpoint);
-  const directives = (options.query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+  const directives = (options.query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+    .directives as DirectiveNode[];
   if (directives.length === 0) {
     const dummyGQL = gql`query a($c: any) { b(c: $c) ${options.endpoint.gql} {d} }`;
-    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0].directives as DirectiveNode[];
+    const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
+      .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
   }
 

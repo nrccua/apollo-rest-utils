@@ -78,11 +78,7 @@
                 ],
                 "summary": "Authenticates a user",
                 "operationId": "login",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "description": "email and password to be used in the authentication process. If acceptedTerms is set to true, it will update user's terms attribute",
@@ -451,11 +447,7 @@
                 "summary": "Activate user",
                 "operationId": "activateUser",
                 "description": "Verifies user e-mail and if e-mail is valid, activate user and set userName and password as provided on body.",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "description": "Body contains the user e-mail to be verified and the verificationCode, which corresponds to the authToken \n          in the user model; the userName to be set; the password; and user uid",
@@ -811,11 +803,7 @@
                 "summary": "Send forgot password e-mail",
                 "operationId": "forgotPassword",
                 "description": "Requests a password change. An e-mail with instructions on how to change the password will be sent to the configured user e-mail.",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "description": "Body should have the e-mail or userName of the user that forgot his password",
@@ -871,9 +859,6 @@
                 "operationId": "resetPassword",
                 "description": "Changes user password to a new password provided in the request body.",
                 "security": [
-                    {
-                        "AWS": []
-                    },
                     {
                         "JWT": []
                     }
@@ -957,11 +942,7 @@
                 "summary": "Refresh JWT",
                 "operationId": "refreshJWT",
                 "description": "Return a new Json Web Token with a refreshed expiration time.",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "responses": {
                     "200": {
                         "description": "JWT successfully refreshed",
@@ -998,11 +979,7 @@
                 "summary": "Check authorization to module",
                 "operationId": "checkModuleAuthorization",
                 "description": "Check authorization to module by moduleIdentifier (it could be both uid or key).",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "parameters": [
                     {
                         "name": "moduleIdentifier",
@@ -1157,11 +1134,7 @@
                 "summary": "Validate Email",
                 "operationId": "validateEmail",
                 "description": "Return a flag indicating if e-mails is valid (not used yet) or invalid.",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "description": "Body must contain the e-mail to be validated, in other words, an e-mail that uniqueness will be verified.",
@@ -1234,9 +1207,6 @@
                 "operationId": "identifyEmail",
                 "description": "Identify whether the email exists in UMS (`existing`) and is supported (`supported`) by Encourage. DataLab users are not supported.",
                 "security": [
-                    {
-                        "AWS": []
-                    },
                     {
                         "JWT": []
                     }
@@ -1326,11 +1296,7 @@
                 "summary": "Validate Username",
                 "operationId": "validateUsername",
                 "description": "Return flags indicating if username is valid (not used yet) or invalid.",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "description": "Body must contain the username to be validated.",
@@ -4010,11 +3976,7 @@
                 "summary": "Submits a new user support ticket",
                 "description": "Sends an email to support, containing related high school and user data",
                 "operationId": "userSignup",
-                "security": [
-                    {
-                        "AWS": []
-                    }
-                ],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -4104,6 +4066,380 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        },
+        "/users/{uid}/attributes": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Updates an Encourage User's UMS attributes",
+                "description": "Updates a user/'s attributes in UMS, identified by UID. Parameters to be updated are provided in the requested body and correspond to the \n        fields described in attributes model. Attributes in the payload must be a non-empty array.",
+                "operationId": "updateUserAttributes",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "Unique identifier in UMS",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "key"
+                                    ],
+                                    "properties": {
+                                        "key": {
+                                            "type": "string",
+                                            "example": "tempore"
+                                        },
+                                        "value": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "uid": {
+                                            "type": "string",
+                                            "example": "1e6c6d8e-af30-43ca-a519-395734701eba"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "User",
+                                            "default": "User",
+                                            "enum": [
+                                                "LdapUser",
+                                                "Role",
+                                                "User"
+                                            ]
+                                        },
+                                        "firstName": {
+                                            "type": "string",
+                                            "example": "testUserFirstName"
+                                        },
+                                        "lastName": {
+                                            "type": "string",
+                                            "example": "testUserLastName"
+                                        },
+                                        "userName": {
+                                            "type": "string",
+                                            "example": "testUserName"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Active",
+                                            "enum": [
+                                                "Active",
+                                                "Inactive",
+                                                "Pending",
+                                                "Disabled"
+                                            ]
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "format": "email",
+                                            "example": "test@user.mail"
+                                        },
+                                        "verifiedDate": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2019-01-07T18:29:25.493Z"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2019-01-07T18:29:25.493Z"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2019-01-07T18:29:25.493Z"
+                                        },
+                                        "externalIds": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "required": [
+                                                    "uid",
+                                                    "userUid",
+                                                    "source",
+                                                    "externalId"
+                                                ],
+                                                "properties": {
+                                                    "uid": {
+                                                        "type": "string",
+                                                        "example": "aaaa-bbbbb-ccccc-ddddd",
+                                                        "description": "UMS unique identifier for the external ID entity"
+                                                    },
+                                                    "userUid": {
+                                                        "type": "string",
+                                                        "example": "82596c17-2e90-4321-8f67-c16e4a4ae646"
+                                                    },
+                                                    "organizationUid": {
+                                                        "type": "string",
+                                                        "example": "a80585ee-7e81-4d7c-8a75-4c2293243703",
+                                                        "description": "Optional property if the external ID for the user is related to an org"
+                                                    },
+                                                    "source": {
+                                                        "type": "string",
+                                                        "example": "contact_id"
+                                                    },
+                                                    "externalId": {
+                                                        "type": "string",
+                                                        "example": "HCSXFXYZ"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "creator": {
+                                            "type": "object",
+                                            "properties": {
+                                                "uid": {
+                                                    "type": "string",
+                                                    "example": "1e6c6d8e-af30-43ca-a519-395734701eba"
+                                                },
+                                                "firstName": {
+                                                    "type": "string",
+                                                    "example": "testUserFirstName"
+                                                },
+                                                "lastName": {
+                                                    "type": "string",
+                                                    "example": "testUserLastName"
+                                                }
+                                            }
+                                        },
+                                        "versionWarning": {
+                                            "type": "boolean",
+                                            "example": "false",
+                                            "default": "false"
+                                        },
+                                        "application": {
+                                            "type": "object",
+                                            "properties": {
+                                                "modules": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "uid": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "key": {
+                                                                "type": "string"
+                                                            },
+                                                            "permissionOverwrite": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "attributesOverwrite": {
+                                                                "type": "object",
+                                                                "required": [
+                                                                    "key"
+                                                                ],
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "example": "tempore"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "object"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "key": {
+                                                    "type": "string",
+                                                    "example": "Encourage"
+                                                }
+                                            }
+                                        },
+                                        "organizations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "uid": {
+                                                        "type": "string",
+                                                        "example": "2e6dba3f-4916-469d-bb6e-01d2c67b2211"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "Organization",
+                                                            "OrgType"
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "NitzscheandSons"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "Active",
+                                                            "Inactive",
+                                                            "Pending"
+                                                        ],
+                                                        "example": "Pending"
+                                                    },
+                                                    "sfAccountId": {
+                                                        "type": "string",
+                                                        "example": "0016000000ImzzJAAR"
+                                                    },
+                                                    "externalId": {
+                                                        "type": "string",
+                                                        "example": "003422"
+                                                    },
+                                                    "actCode": {
+                                                        "type": "string",
+                                                        "example": "0011"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2017-06-21T16:36:08.039Z"
+                                                    },
+                                                    "updatedAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2017-06-21T16:36:08.039Z"
+                                                    },
+                                                    "programs": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    },
+                                                    "group": {},
+                                                    "parent": {},
+                                                    "creator": {},
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    },
+                                                    "applications": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    },
+                                                    "attributes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "required": [
+                                                                "key"
+                                                            ],
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "example": "tempore"
+                                                                },
+                                                                "value": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "uid": {
+                                                        "type": "string",
+                                                        "example": "bf45a23c-b527-4c5d-b7b8-60250339d265"
+                                                    },
+                                                    "roleName": {
+                                                        "type": "string",
+                                                        "example": "Administrator"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "attributes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "required": [
+                                                    "key"
+                                                ],
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string",
+                                                        "example": "tempore"
+                                                    },
+                                                    "value": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "number",
+                                            "example": 401
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "jwt expired"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -4631,7 +4967,7 @@
                 }
             }
         },
-        "/users/contact/{contact_id}": {
+        "/users/contact/{contactId}": {
             "get": {
                 "tags": [
                     "User"
@@ -4641,7 +4977,7 @@
                 "operationId": "getUserStatusByContactId",
                 "parameters": [
                     {
-                        "name": "contact_id",
+                        "name": "contactId",
                         "in": "path",
                         "description": "The external ID, contact_id, of the educator contact",
                         "required": true,
@@ -4687,7 +5023,7 @@
                 }
             }
         },
-        "/users/contact/{contact_id}/generate-code": {
+        "/users/contact/{contactId}/generate-code": {
             "post": {
                 "tags": [
                     "User"
@@ -4697,7 +5033,7 @@
                 "operationId": "generateCode",
                 "parameters": [
                     {
-                        "name": "contact_id",
+                        "name": "contactId",
                         "in": "path",
                         "description": "The external ID, contact_id, of the educator contact",
                         "required": true,
@@ -4728,7 +5064,7 @@
                 }
             }
         },
-        "/users/contact/{contact_id}/validate-code": {
+        "/users/contact/{contactId}/validate-code": {
             "post": {
                 "tags": [
                     "User"
@@ -4738,7 +5074,7 @@
                 "operationId": "validateCode",
                 "parameters": [
                     {
-                        "name": "contact_id",
+                        "name": "contactId",
                         "in": "path",
                         "description": "The external ID, contact_id, of the educator contact",
                         "required": true,
@@ -5606,207 +5942,210 @@
                                                     }
                                                 }
                                             },
-                                            "userSchool": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "student_key": {
-                                                        "type": "string",
-                                                        "example": "102482975"
-                                                    },
-                                                    "school_id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "application_status_key": {
-                                                        "type": "string",
-                                                        "enum": [
-                                                            "INITIAL",
-                                                            "APPLYING_0",
-                                                            "APPLYING_25",
-                                                            "APPLYING_50",
-                                                            "APPLYING_75",
-                                                            "APPLIED",
-                                                            "ACCEPTED",
-                                                            "NOT_ACCEPTED",
-                                                            "ENROLLING",
-                                                            "NOT_ENROLLING",
-                                                            "DEFERRED_WAITLISTED"
-                                                        ]
-                                                    },
-                                                    "update_increment": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "is_bookmarked": {
-                                                        "type": "boolean",
-                                                        "example": true
-                                                    },
-                                                    "is_declared": {
-                                                        "type": "boolean",
-                                                        "example": true
-                                                    },
-                                                    "is_quickmatch": {
-                                                        "type": "boolean",
-                                                        "example": false
-                                                    },
-                                                    "is_aos": {
-                                                        "type": "boolean",
-                                                        "example": false
-                                                    },
-                                                    "application_status": {
-                                                        "type": "string",
-                                                        "example": "applying"
-                                                    },
-                                                    "applying_percent": {
-                                                        "type": "integer",
-                                                        "example": 75
-                                                    },
-                                                    "school": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "name": {
-                                                                "type": "string",
-                                                                "example": "CollegeName"
-                                                            },
-                                                            "nickname": {
-                                                                "type": "string",
-                                                                "example": "CollegeNickname"
-                                                            },
-                                                            "fice": {
-                                                                "type": "string",
-                                                                "example": "1525134"
-                                                            },
-                                                            "ug_inst_id": {
-                                                                "type": "string",
-                                                                "example": "collegeinsta"
-                                                            },
-                                                            "ipeds_id": {
-                                                                "type": "string",
-                                                                "default": "234525"
-                                                            },
-                                                            "address_1": {
-                                                                "type": "string",
-                                                                "default": "CollegeAddress1"
-                                                            },
-                                                            "address_2": {
-                                                                "type": "string",
-                                                                "default": "CollegeAddress2"
-                                                            },
-                                                            "city": {
-                                                                "type": "string",
-                                                                "default": "CollegeCity"
-                                                            },
-                                                            "state": {
-                                                                "type": "string",
-                                                                "default": "CS"
-                                                            },
-                                                            "zip": {
-                                                                "type": "string",
-                                                                "default": "12345"
-                                                            },
-                                                            "country": {
-                                                                "type": "string",
-                                                                "default": "CollegeCountry"
-                                                            },
-                                                            "urls": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "type": {
-                                                                            "type": "string",
-                                                                            "enum": [
-                                                                                "M",
-                                                                                "I",
-                                                                                "S",
-                                                                                "A",
-                                                                                "B"
-                                                                            ]
-                                                                        },
-                                                                        "value": {
-                                                                            "type": "string",
-                                                                            "example": "www.example.com"
-                                                                        },
-                                                                        "type_desc": {
-                                                                            "type": "string",
-                                                                            "enum": [
-                                                                                "Main",
-                                                                                "Inquiry",
-                                                                                "Schedule Visit",
-                                                                                "Apply",
-                                                                                "Admissions Blog"
-                                                                            ]
+                                            "user_schools": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "student_key": {
+                                                            "type": "string",
+                                                            "example": "102482975"
+                                                        },
+                                                        "school_id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "application_status_key": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "INITIAL",
+                                                                "APPLYING_0",
+                                                                "APPLYING_25",
+                                                                "APPLYING_50",
+                                                                "APPLYING_75",
+                                                                "APPLIED",
+                                                                "ACCEPTED",
+                                                                "NOT_ACCEPTED",
+                                                                "ENROLLING",
+                                                                "NOT_ENROLLING",
+                                                                "DEFERRED_WAITLISTED"
+                                                            ]
+                                                        },
+                                                        "update_increment": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "is_bookmarked": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "is_declared": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "is_quickmatch": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        },
+                                                        "is_aos": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        },
+                                                        "application_status": {
+                                                            "type": "string",
+                                                            "example": "applying"
+                                                        },
+                                                        "applying_percent": {
+                                                            "type": "integer",
+                                                            "example": 75
+                                                        },
+                                                        "school": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "CollegeName"
+                                                                },
+                                                                "nickname": {
+                                                                    "type": "string",
+                                                                    "example": "CollegeNickname"
+                                                                },
+                                                                "fice": {
+                                                                    "type": "string",
+                                                                    "example": "1525134"
+                                                                },
+                                                                "ug_inst_id": {
+                                                                    "type": "string",
+                                                                    "example": "collegeinsta"
+                                                                },
+                                                                "ipeds_id": {
+                                                                    "type": "string",
+                                                                    "default": "234525"
+                                                                },
+                                                                "address_1": {
+                                                                    "type": "string",
+                                                                    "default": "CollegeAddress1"
+                                                                },
+                                                                "address_2": {
+                                                                    "type": "string",
+                                                                    "default": "CollegeAddress2"
+                                                                },
+                                                                "city": {
+                                                                    "type": "string",
+                                                                    "default": "CollegeCity"
+                                                                },
+                                                                "state": {
+                                                                    "type": "string",
+                                                                    "default": "CS"
+                                                                },
+                                                                "zip": {
+                                                                    "type": "string",
+                                                                    "default": "12345"
+                                                                },
+                                                                "country": {
+                                                                    "type": "string",
+                                                                    "default": "CollegeCountry"
+                                                                },
+                                                                "urls": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "type": {
+                                                                                "type": "string",
+                                                                                "enum": [
+                                                                                    "M",
+                                                                                    "I",
+                                                                                    "S",
+                                                                                    "A",
+                                                                                    "B"
+                                                                                ]
+                                                                            },
+                                                                            "value": {
+                                                                                "type": "string",
+                                                                                "example": "www.example.com"
+                                                                            },
+                                                                            "type_desc": {
+                                                                                "type": "string",
+                                                                                "enum": [
+                                                                                    "Main",
+                                                                                    "Inquiry",
+                                                                                    "Schedule Visit",
+                                                                                    "Apply",
+                                                                                    "Admissions Blog"
+                                                                                ]
+                                                                            }
                                                                         }
                                                                     }
-                                                                }
-                                                            },
-                                                            "has_campus_image_1x1": {
-                                                                "type": "boolean"
-                                                            },
-                                                            "has_campus_image_16x9": {
-                                                                "type": "boolean"
-                                                            },
-                                                            "slug_name": {
-                                                                "type": "string",
-                                                                "example": "test-university-1"
-                                                            },
-                                                            "images": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "logo": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/logo.png"
-                                                                    },
-                                                                    "1x1_320": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "1x1_640": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "1x1_1076": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "1x1_1500": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "1x1_2048": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "16x9_320": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "16x9_640": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "16x9_1076": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "16x9_1500": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
-                                                                    },
-                                                                    "16x9_2048": {
-                                                                        "type": "string",
-                                                                        "format": "uri",
-                                                                        "example": "https://www.test.com/image.jpg"
+                                                                },
+                                                                "has_campus_image_1x1": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "has_campus_image_16x9": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "slug_name": {
+                                                                    "type": "string",
+                                                                    "example": "test-university-1"
+                                                                },
+                                                                "images": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "logo": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/logo.png"
+                                                                        },
+                                                                        "1x1_320": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "1x1_640": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "1x1_1076": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "1x1_1500": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "1x1_2048": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "16x9_320": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "16x9_640": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "16x9_1076": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "16x9_1500": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        },
+                                                                        "16x9_2048": {
+                                                                            "type": "string",
+                                                                            "format": "uri",
+                                                                            "example": "https://www.test.com/image.jpg"
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -6025,7 +6364,7 @@
                 }
             }
         },
-        "/students/{key}": {
+        "/students/{studentKey}": {
             "get": {
                 "tags": [
                     "Student"
@@ -6263,7 +6602,7 @@
                 }
             }
         },
-        "/students/{key}/application-management": {
+        "/students/{studentkey}/application-management": {
             "get": {
                 "tags": [
                     "Student"
@@ -6592,7 +6931,7 @@
                 }
             }
         },
-        "/students/{key}/checklist": {
+        "/students/{studentkey}/checklist": {
             "get": {
                 "tags": [
                     "Student"
@@ -6753,7 +7092,7 @@
                 }
             }
         },
-        "/students/{key}/test-scores": {
+        "/students/{studentkey}/test-scores": {
             "get": {
                 "tags": [
                     "Student"
@@ -6982,7 +7321,7 @@
                 }
             }
         },
-        "/students/{key}/survey-answers": {
+        "/students/{studentkey}/survey-answers": {
             "get": {
                 "tags": [
                     "Student"
@@ -7110,7 +7449,7 @@
                 }
             }
         },
-        "/students/{key}/application-status": {
+        "/students/{studentkey}/application-status": {
             "get": {
                 "tags": [
                     "Student"
@@ -7396,7 +7735,7 @@
                 }
             }
         },
-        "/students/{key}/colleges": {
+        "/students/{studentkey}/colleges": {
             "get": {
                 "tags": [
                     "Student"
@@ -7894,7 +8233,7 @@
                 }
             }
         },
-        "/students/{key}/scholarships": {
+        "/students/{studentkey}/scholarships": {
             "get": {
                 "tags": [
                     "Student"
@@ -8013,7 +8352,7 @@
                 }
             }
         },
-        "/students/{key}/colleges/{collegeFice}/credentials": {
+        "/students/{studentkey}/colleges/{collegeFice}/credentials": {
             "post": {
                 "tags": [
                     "Credentials"
@@ -8298,7 +8637,7 @@
                 }
             }
         },
-        "/students/{key}/credentials/{credUid}": {
+        "/students/{studentkey}/credentials/{credUid}": {
             "post": {
                 "tags": [
                     "Credentials"
@@ -8437,7 +8776,7 @@
                 }
             }
         },
-        "/students/{key}/external-credentials/colleges/{collegeId}": {
+        "/students/{studentkey}/external-credentials/colleges/{collegeId}": {
             "put": {
                 "tags": [
                     "External Credentials"
@@ -8809,6 +9148,67 @@
                                                 "usps_zip": {
                                                     "type": "string",
                                                     "example": "11222"
+                                                }
+                                            }
+                                        },
+                                        "permissions": {
+                                            "type": "object",
+                                            "properties": {
+                                                "reportACTE": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportACTFL": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportCOF": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportDECA": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportFBLA": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportFCCLA": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportMAA": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportMCO": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportNABSE": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportNAFME": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportNCSS": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportSHAPE": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportSTEM": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "reportSUPERINTENDENT": {
+                                                    "type": "boolean",
+                                                    "example": true
                                                 }
                                             }
                                         }
@@ -9194,6 +9594,65 @@
                                                                         }
                                                                     }
                                                                 }
+                                                            },
+                                                            "attributes": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "key": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "key": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "boolean"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "key": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "number"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "key": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "value": {
+                                                                                            "type": "boolean"
+                                                                                        },
+                                                                                        "at": {
+                                                                                            "type": "number"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
                                                             }
                                                         }
                                                     },
@@ -9232,6 +9691,46 @@
                                                     "createdAt": {
                                                         "type": "string",
                                                         "example": "2020-06-19T14:29:37.492Z"
+                                                    },
+                                                    "attributes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "key": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "key": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "key": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "number"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
                                                     }
                                                 }
                                             }
@@ -12668,6 +13167,217 @@
                     },
                     "404": {
                         "description": "College not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/report/users": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Get all active encourage users report",
+                "operationId": "reportUsers",
+                "description": "Gets detailed list of active UMS users who are using encourage",
+                "parameters": [
+                    {
+                        "name": "Cache-Control",
+                        "in": "header",
+                        "description": "Informs the service that it should skip cache reading (no-cache), writing (no-store) or both in this request",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "no-cache",
+                                "no-store",
+                                "no-cache no-store"
+                            ]
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "default": 100,
+                            "minimum": 1
+                        },
+                        "required": false,
+                        "description": "Size limit for returned array"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "minimum": 0
+                        },
+                        "required": false,
+                        "description": "Offset for the data to be returned"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "uid": {
+                                                        "type": "string"
+                                                    },
+                                                    "firstName": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastName": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "string"
+                                                    },
+                                                    "attribute": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key",
+                                                                "value"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "application": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "organizations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "uid": {
+                                                                    "type": "string"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "role": {
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                },
+                                                                "hsId": {
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                },
+                                                                "contactId": {
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "uid",
+                                                                "name"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "modules": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "verifiedDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "lastLoginDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "uid",
+                                                "firstName",
+                                                "lastName",
+                                                "email",
+                                                "status",
+                                                "createdAt",
+                                                "createdBy",
+                                                "attributes",
+                                                "organizations",
+                                                "modules",
+                                                "verifiedDate"
+                                            ]
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "properties",
+                                        "total"
+                                    ]
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Expires": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "The expiration date for a given requested resource, only when obtained from the cache"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "number",
+                                            "example": 401
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "jwt expired"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -16584,6 +17294,65 @@
                                         }
                                     }
                                 }
+                            },
+                            "attributes": {
+                                "type": "array",
+                                "items": {
+                                    "oneOf": [
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "at": {
+                                                            "type": "number"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         }
                     },
@@ -16622,6 +17391,46 @@
                     "createdAt": {
                         "type": "string",
                         "example": "2020-06-19T14:29:37.492Z"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
                     }
                 }
             },
@@ -16738,6 +17547,65 @@
                                                     }
                                                 }
                                             }
+                                        },
+                                        "attributes": {
+                                            "type": "array",
+                                            "items": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "key": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "key": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "key": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "number"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "key": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "at": {
+                                                                        "type": "number"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
                                         }
                                     }
                                 },
@@ -16776,6 +17644,46 @@
                                 "createdAt": {
                                     "type": "string",
                                     "example": "2020-06-19T14:29:37.492Z"
+                                },
+                                "attributes": {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "boolean"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }
@@ -17103,6 +18011,67 @@
                     "type": {
                         "type": "string",
                         "example": "Primary"
+                    }
+                }
+            },
+            "secondarySchoolReportPermissions": {
+                "type": "object",
+                "properties": {
+                    "reportACTE": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportACTFL": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportCOF": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportDECA": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportFBLA": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportFCCLA": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportMAA": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportMCO": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportNABSE": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportNAFME": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportNCSS": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportSHAPE": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportSTEM": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reportSUPERINTENDENT": {
+                        "type": "boolean",
+                        "example": true
                     }
                 }
             },
@@ -17450,6 +18419,127 @@
                     }
                 }
             },
+            "reportUser": {
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "uid": {
+                                    "type": "string"
+                                },
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "createdBy": {
+                                    "type": "string"
+                                },
+                                "attribute": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "value"
+                                        ]
+                                    }
+                                },
+                                "application": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "organizations": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "uid": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "role": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "hsId": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "contactId": {
+                                                "type": "string",
+                                                "nullable": true
+                                            }
+                                        },
+                                        "required": [
+                                            "uid",
+                                            "name"
+                                        ]
+                                    }
+                                },
+                                "modules": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "verifiedDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "lastLoginDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "required": [
+                            "uid",
+                            "firstName",
+                            "lastName",
+                            "email",
+                            "status",
+                            "createdAt",
+                            "createdBy",
+                            "attributes",
+                            "organizations",
+                            "modules",
+                            "verifiedDate"
+                        ]
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "properties",
+                    "total"
+                ]
+            },
             "unauthorized": {
                 "type": "object",
                 "properties": {
@@ -17552,6 +18642,17 @@
                 "schema": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1
+                },
+                "required": false,
+                "description": "Size limit for returned array"
+            },
+            "limit100": {
+                "in": "query",
+                "name": "limit",
+                "schema": {
+                    "type": "integer",
+                    "default": 100,
                     "minimum": 1
                 },
                 "required": false,
@@ -17824,6 +18925,18 @@
                     "example": "contact_id"
                 }
             },
+            "overwrites": {
+                "name": "overwrites",
+                "in": "query",
+                "description": "Send it as 'true' to receive attribute overwrites. Default is false.",
+                "schema": {
+                    "type": "string",
+                    "enum": [
+                        true,
+                        false
+                    ]
+                }
+            },
             "uid": {
                 "name": "uid",
                 "in": "path",
@@ -17837,15 +18950,6 @@
                 "name": "studentKey",
                 "in": "path",
                 "description": "Student key",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "key": {
-                "name": "key",
-                "in": "path",
-                "description": "Attribute key UID",
                 "required": true,
                 "schema": {
                     "type": "string"
@@ -17896,8 +19000,17 @@
                     "type": "string"
                 }
             },
+            "moduleIdentifier": {
+                "name": "moduleIdentifier",
+                "in": "path",
+                "description": "Module identifier (can be uid or key)",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
             "contactId": {
-                "name": "contact_id",
+                "name": "contactId",
                 "in": "path",
                 "description": "The external ID, contact_id, of the educator contact",
                 "required": true,
@@ -17985,9 +19098,6 @@
         }
     },
     "security": [
-        {
-            "AWS": []
-        },
         {
             "JWT": []
         }

@@ -43,19 +43,22 @@ describe('generateTypescript', () => {
     deleteBuildFolder();
   });
 
-  it.each(fs.readdirSync(testSwaggerPath).map(d => path.join(testSwaggerPath, d)))('can parse the swagger document %s', async apiPath => {
-    const api = await SwaggerParser.validate(apiPath);
+  it.each(fs.readdirSync(testSwaggerPath).map(d => path.join(testSwaggerPath, d)))(
+    'can parse the swagger document %s',
+    async apiPath => {
+      const api = await SwaggerParser.validate(apiPath);
 
-    const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
+      const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
 
-    const tsData = generateTypescript(api, typeImport).replace(/apollo-rest-utils/g, '../../lib');
+      const tsData = generateTypescript(api, typeImport).replace(/apollo-rest-utils/g, '../../lib');
 
-    expect(tsData).toBeTruthy(); // Not empty, null, or undefined
+      expect(tsData).toBeTruthy(); // Not empty, null, or undefined
 
-    expect(tsData.includes(', endpoint: "')).toBe(false);
+      expect(tsData.includes(', endpoint: "')).toBe(false);
 
-    doTestImport(tsData);
-  });
+      doTestImport(tsData);
+    },
+  );
 
   it('can generate endpoints with the optional endpoint id', async () => {
     const apiPath = path.join(testSwaggerPath, 'OpenAPIV3WithRef.json');
