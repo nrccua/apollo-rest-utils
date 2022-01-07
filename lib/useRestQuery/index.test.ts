@@ -284,6 +284,16 @@ describe('validateQueryAgainstEndpoint', () => {
     expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).not.toThrowError();
   });
 
+  it('should not throw an error for a valid mutation without a return value', () => {
+    const query = gql`
+      mutation TestMutation($input: input) {
+        refreshToken(input: $input)
+      }
+    `;
+
+    expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).not.toThrowError();
+  });
+
   it('should throw an error for a query with no definitions', () => {
     const query = { definitions: [], kind: 'Document' } as DocumentNode;
 

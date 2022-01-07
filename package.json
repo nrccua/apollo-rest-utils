@@ -62,6 +62,8 @@
     "clean:full": "npm run clean && rm -rf node_modules",
     "postinstall": "npm run build",
     "prepare": "husky install && git config --local push.followTags true",
+    "removetag": "git tag -d $npm_config_tag && git push --delete origin $npm_config_tag",
+    "removetag:help": "echo Usage: npm run removetag --tag=<tag>",
     "test": "npm-run-all test:**",
     "test:lint:js": "eslint . --ext .js --fix --quiet",
     "test:lint:md": "markdownlint README.md --fix --config node_modules/@actinc/eslint-config/markdownlint.config.json",

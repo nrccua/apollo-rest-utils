@@ -59,24 +59,29 @@ export function validateQueryAgainstEndpoint<TName extends string, TData = unkno
     throw new InvalidQueryError('Query selection must be a field', query, endpoint);
   }
 
-  if (selection.selectionSet === undefined || selection.selectionSet.selections.length === 0) {
+  if (
+    definition.operation === 'query' &&
+    (selection.selectionSet === undefined || selection.selectionSet.selections.length === 0)
+  ) {
     throw new InvalidQueryError('Query selection must contain at least one value to return', query, endpoint);
   }
 
-  const subFields = selection.selectionSet.selections.map(s => (s as FieldNode).name.value);
+  if (selection.selectionSet?.selections) {
+    const subFields = selection.selectionSet.selections.map(s => (s as FieldNode).name.value);
 
-  const badFields = subFields.filter(
-    fieldName =>
-      endpoint.responseSchema !== undefined && getSchemaField(endpoint.responseSchema, fieldName) === undefined,
-  );
-
-  if (badFields.length > 0) {
-    throw new InvalidQueryError(
-      `Query contains invalid fields: ${badFields.join(', ')}`,
-      query,
-      endpoint,
-      endpoint.responseSchema,
+    const badFields = subFields.filter(
+      fieldName =>
+        endpoint.responseSchema !== undefined && getSchemaField(endpoint.responseSchema, fieldName) === undefined,
     );
+
+    if (badFields.length > 0) {
+      throw new InvalidQueryError(
+        `Query contains invalid fields: ${badFields.join(', ')}`,
+        query,
+        endpoint,
+        endpoint.responseSchema,
+      );
+    }
   }
 }
 
