@@ -69,9 +69,9 @@
     "test:prettier": "prettier --write './**/*.js' './**/*.ts'",
     "test:types": "tsc --project ./tsconfig.json --noEmit",
     "test:unit": "NODE_ENV=test jest --silent --coverage",
-    "update:version": "standard-version",
-    "update:version:major": "standard-version --release-as major",
-    "update:version:minor": "standard-version --release-as minor"
+    "update:version": "standard-version && npm run test:lint:md",
+    "update:version:major": "standard-version --release-as major && npm run test:lint:md",
+    "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.3.3"
+  "version": "1.4.0"
 }
