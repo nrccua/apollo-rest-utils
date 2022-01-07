@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/nrccua/apollo-rest-utils/compare/1.3.0...1.3.1) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Allow an empty input body to be passed to be passed in variables ([4b67e40](https://github.com/nrccua/apollo-rest-utils/commit/4b67e4033b6773a682b4363224076e9dcdf0f828))
+* [E4E-87]: 1.3.0 ([cbda2b6](https://github.com/nrccua/apollo-rest-utils/commit/cbda2b6cef2483571b99b99943777aafb21c2449))
+
 ## [1.3.0](https://github.com/nrccua/apollo-rest-utils/compare/1.2.2...1.3.0) (2022-01-06)
 
 
