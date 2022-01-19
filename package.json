@@ -75,5 +75,5 @@
     "update:version:major": "standard-version --release-as major && npm run test:lint:md",
     "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.4.1"
+  "version": "1.4.2"
 }
