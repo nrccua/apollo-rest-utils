@@ -25,9 +25,7 @@ function stripOptionals(gqlQuery: string, variables?: Record<string, unknown>): 
   const args = Array.from(gqlQuery.matchAll(/{args.([^}]*)}/g)).map(m => m[1]);
   let renderedGql = gqlQuery;
 
-  console.log({ args, renderedGql });
   args.forEach(arg => {
-    console.log({ arg, variables });
     if (!variables || !(arg in variables) || variables[arg] === undefined) {
       // eslint-disable-next-line security/detect-non-literal-regexp
       renderedGql = renderedGql.replace(new RegExp(`${arg}={args.${arg}}`, 'g'), '');
