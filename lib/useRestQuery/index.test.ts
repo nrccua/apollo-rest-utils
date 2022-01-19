@@ -26,10 +26,14 @@ jest.mock('@apollo/client', () => ({
 describe('useRestQuery Library', () => {
   const useMutationMock = useMutation as jest.Mock;
   const useQueryMock = useQuery as jest.Mock;
-  const dummyEndpoint = { gql: '@rest(method: "get", path: "test")' } as IRestEndpoint<
+  const dummyEndpoint = { gql: '@rest(method: "get", path: "test/{args.testInput}")' } as IRestEndpoint<
     { sessionToken: string },
     { testInput: string }
   >;
+
+  const dummyEndpointWithOptional = {
+    gql: '@rest(method: "get", path: "test/{args.testInput}?optional={args.optional}")',
+  } as IRestEndpoint<{ sessionToken: string }, { testInput: string; optional?: string }>;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -53,7 +57,7 @@ describe('useRestQuery Library', () => {
     const wrappedRestMutation = wrapRestMutation<'refreshToken'>();
     const [refreshToken] = wrappedRestMutation(
       gql`
-        query TestMutation($input: input) {
+        mutation TestMutationB088D1CCBE7C($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -92,7 +96,7 @@ describe('useRestQuery Library', () => {
     const wrappedRestMutation = wrapRestMutation<'refreshToken'>();
     const [refreshToken] = wrappedRestMutation(
       gql`
-        query TestMutation($input: input) {
+        mutation TestMutationA6D73CE52831($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -123,7 +127,7 @@ describe('useRestQuery Library', () => {
     const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
     const { data } = wrappedRestQuery(
       gql`
-        query TestQuery($input: input) {
+        query TestQuery2067FE118166($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -153,7 +157,7 @@ describe('useRestQuery Library', () => {
     const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
     const { data } = wrappedRestQuery(
       gql`
-        query TestQuery($input: input) {
+        query TestQuery0DE04F7BFE72($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -177,6 +181,67 @@ describe('useRestQuery Library', () => {
     expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
 
+  it('wrapRestQuery should create a function that does not pass optional variables when not present', () => {
+    const testToken = 'TEST_TOKEN';
+    useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
+    const { data } = wrappedRestQuery(
+      gql`
+        query TestQuery3353136F6C33($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      {
+        endpoint: dummyEndpointWithOptional,
+        variables: {
+          testInput: 'test',
+        },
+      },
+    );
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useQueryMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected without the optional
+    expect(print(generatedNode)).not.toContain('?optional={args.optional}');
+  });
+
+  it('wrapRestQuery should create a function that does pass optional variables when present', () => {
+    const testToken = 'TEST_TOKEN';
+    useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
+    const { data } = wrappedRestQuery(
+      gql`
+        query TestQuery4($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      {
+        endpoint: dummyEndpointWithOptional,
+        variables: {
+          optional: 'OPTION',
+          testInput: 'test',
+        },
+      },
+    );
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useQueryMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected with the optional
+    expect(print(generatedNode)).toContain('?optional={args.optional}');
+  });
+
   it('wrapRestClientQuery should create a function that returns results via client.query', async () => {
     const testToken = 'TEST_TOKEN';
     const clientMock = new MockApolloClient();
@@ -189,7 +254,7 @@ describe('useRestQuery Library', () => {
       client: clientMock as unknown as ApolloClient<object>,
       endpoint: dummyEndpoint,
       query: gql`
-        query TestClientQuery($input: input) {
+        query TestClientQuery3F3C1DCCA1E2($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -222,7 +287,7 @@ describe('useRestQuery Library', () => {
       client: clientMock as unknown as ApolloClient<object>,
       endpoint: dummyEndpoint,
       query: gql`
-        query TestClientQuery($input: input) {
+        query TestClientQueryA88578653318($input: input) {
           refreshToken(input: $input) {
             sessionToken
           }
@@ -243,6 +308,73 @@ describe('useRestQuery Library', () => {
     // Make sure our @rest gql got injected
     expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
+
+  it('wrapRestClientQuery should create a function that does not pass optional variables when not present', async () => {
+    const testToken = 'TEST_TOKEN';
+    const clientMock = new MockApolloClient();
+
+    clientMock.query.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestClientQuery<'refreshToken'>();
+
+    const { data } = await wrappedRestQuery({
+      client: clientMock as unknown as ApolloClient<object>,
+      endpoint: dummyEndpointWithOptional,
+      query: gql`
+        query TestClientQuery88F953B187A6($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      variables: {
+        testInput: 'test',
+      },
+    });
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])
+      ?.query as DocumentNode;
+
+    // Make sure our @rest gql got injected without the optional
+    expect(print(generatedNode)).not.toContain('?optional={args.optional}');
+  });
+
+  it('wrapRestClientQuery should create a function that does pass optional variables when present', async () => {
+    const testToken = 'TEST_TOKEN';
+    const clientMock = new MockApolloClient();
+
+    clientMock.query.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestClientQuery<'refreshToken'>();
+
+    const { data } = await wrappedRestQuery({
+      client: clientMock as unknown as ApolloClient<object>,
+      endpoint: dummyEndpointWithOptional,
+      query: gql`
+        query TestClientQuery12836BB2CE80($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      variables: {
+        optional: 'OPTIONAL',
+        testInput: 'test',
+      },
+    });
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])
+      ?.query as DocumentNode;
+
+    // Make sure our @rest gql got injected without the optional
+    expect(print(generatedNode)).toContain('?optional={args.optional}');
+  });
 });
 
 describe('validateQueryAgainstEndpoint', () => {
@@ -261,7 +393,7 @@ describe('validateQueryAgainstEndpoint', () => {
 
   it('should not throw an error for a valid query', () => {
     const query = gql`
-      query TestQuery($input: input) {
+      query TestQuery2DB1249ECE2D($input: input) {
         refreshToken(input: $input) {
           sessionToken
         }
@@ -273,7 +405,7 @@ describe('validateQueryAgainstEndpoint', () => {
 
   it('should not throw an error for a valid query with headers', () => {
     const query = gql`
-      query TestQuery($input: input) {
+      query TestQuery96E94A832983($input: input) {
         refreshToken(input: $input) {
           sessionToken
         }
@@ -286,7 +418,7 @@ describe('validateQueryAgainstEndpoint', () => {
 
   it('should not throw an error for a valid mutation without a return value', () => {
     const query = gql`
-      mutation TestMutation($input: input) {
+      mutation TestMutationDDBF37B7D32E($input: input) {
         refreshToken(input: $input)
       }
     `;
@@ -350,7 +482,7 @@ describe('validateQueryAgainstEndpoint', () => {
 
   it('should throw an error for a query with no requested return value', () => {
     const query = gql`
-      query TestQuery($input: input) {
+      query TestQueryCCE87F921F70($input: input) {
         refreshToken
       }
     `;
@@ -362,7 +494,7 @@ describe('validateQueryAgainstEndpoint', () => {
 
   it('should throw an error for a query with a bad field', () => {
     const query = gql`
-      query TestQuery($input: input) {
+      query TestQuery9944478B3BFE($input: input) {
         refreshToken(input: $input) {
           test
         }

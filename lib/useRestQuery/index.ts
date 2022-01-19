@@ -21,6 +21,21 @@ import { get } from 'lodash';
 
 import { IEndpointOptions, getSchemaField, Input, InvalidQueryError, IRestEndpoint, NamedGQLResult } from '../types';
 
+function stripOptionals(gqlQuery: string, variables?: Record<string, unknown>): string {
+  const args = Array.from(gqlQuery.matchAll(/{args.([^}]*)}/g)).map(m => m[1]);
+  let renderedGql = gqlQuery;
+
+  console.log({ args, renderedGql });
+  args.forEach(arg => {
+    console.log({ arg, variables });
+    if (!variables || !(arg in variables) || variables[arg] === undefined) {
+      // eslint-disable-next-line security/detect-non-literal-regexp
+      renderedGql = renderedGql.replace(new RegExp(`${arg}={args.${arg}}`, 'g'), '');
+    }
+  });
+  return renderedGql;
+}
+
 export function validateQueryAgainstEndpoint<TName extends string, TData = unknown, TVariables = OperationVariables>(
   query: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
   endpoint: IRestEndpoint<NamedGQLResult<TName, TData>, Input<TVariables>>,
@@ -170,7 +185,10 @@ export function useRestQuery<TName extends string, TData, TVariables>(
   const directives = (query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
     .directives as DirectiveNode[];
   if (directives.length === 0) {
-    const dummyGQL = gql`query a($c: any) { b(c: $c) ${options.endpoint.gql} {d} }`;
+    const dummyGQL = gql`query a($c: any) { b(c: $c) ${stripOptionals(
+      options.endpoint.gql,
+      options.variables as unknown as Record<string, unknown> | undefined,
+    )} {d} }`;
     const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
       .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
@@ -232,7 +250,10 @@ export function useRestClientQuery<TName extends string, TData, TVariables>(
   const directives = (options.query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
     .directives as DirectiveNode[];
   if (directives.length === 0) {
-    const dummyGQL = gql`query a($c: any) { b(c: $c) ${options.endpoint.gql} {d} }`;
+    const dummyGQL = gql`query a($c: any) { b(c: $c) ${stripOptionals(
+      options.endpoint.gql,
+      options.variables as unknown as Record<string, unknown> | undefined,
+    )} {d} }`;
     const dummyDirectives = (dummyGQL.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
       .directives as DirectiveNode[];
     directives.push(dummyDirectives[0]);
