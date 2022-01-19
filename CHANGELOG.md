@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changes
 
+* [E4E-87]: Remove console.logs ([24f8f5b](https://github.com/nrccua/apollo-rest-utils/commit/24f8f5b018f0306feaa50bb387868199265accdf))
+* [E4E-87]: 1.4.2 ([6d80ab3](https://github.com/nrccua/apollo-rest-utils/commit/6d80ab37bd2eb1cccf52beb165c63217346dfc8b))
 * [E4E-87]: Strip optionals when possible ([f872125](https://github.com/nrccua/apollo-rest-utils/commit/f87212573b5d3d1624a6ca2effc1e01406ed7122))
 * [E4E-87]: 1.4.1 ([7b0f336](https://github.com/nrccua/apollo-rest-utils/commit/7b0f336f75f5b9752ad5381de541180ca821004a))
 
