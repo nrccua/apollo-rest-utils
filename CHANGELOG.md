@@ -2,8 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.3.2](https://github.com/nrccua/apollo-rest-utils/compare/1.3.1...1.3.2) (2022-01-07)
+### [1.4.2](https://github.com/nrccua/apollo-rest-utils/compare/1.4.1...1.4.2) (2022-01-19)
 
+
+### Changes
+
+* [E4E-87]: Remove console.logs ([24f8f5b](https://github.com/nrccua/apollo-rest-utils/commit/24f8f5b018f0306feaa50bb387868199265accdf))
+* [E4E-87]: 1.4.2 ([6d80ab3](https://github.com/nrccua/apollo-rest-utils/commit/6d80ab37bd2eb1cccf52beb165c63217346dfc8b))
+* [E4E-87]: Strip optionals when possible ([f872125](https://github.com/nrccua/apollo-rest-utils/commit/f87212573b5d3d1624a6ca2effc1e01406ed7122))
+* [E4E-87]: 1.4.1 ([7b0f336](https://github.com/nrccua/apollo-rest-utils/commit/7b0f336f75f5b9752ad5381de541180ca821004a))
+
+### [1.4.1](https://github.com/nrccua/apollo-rest-utils/compare/1.4.0...1.4.1) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Add Input to body when combined with path/query params ([a57478f](https://github.com/nrccua/apollo-rest-utils/commit/a57478fcb59eba26f18599df20909c6faab768ef))
+* [E4E-87]: 1.4.0 (for real this time) ([66aa604](https://github.com/nrccua/apollo-rest-utils/commit/66aa604f9e4230e59da19781ae4f74f870917679))
+
+## [1.4.0](https://github.com/nrccua/apollo-rest-utils/compare/1.3.3...1.4.0) (2022-01-07)
+
+
+### Changes
+
+* [E4E-87]: Allow empty result selections for mutations ([874370d](https://github.com/nrccua/apollo-rest-utils/commit/874370db6e74bc67e651ad1284bf876aedd26bd6))
+* [E4E-87]: 1.4.0 ([ba62579](https://github.com/nrccua/apollo-rest-utils/commit/ba62579a5b10ff5989dc0e755b0d27649716ac80))
+* [E4E-87]: Allow for empty selectionSet on mutations, add some debug logging ([c4d128a](https://github.com/nrccua/apollo-rest-utils/commit/c4d128a2ba6573b7d07866bf65a2ca56557f22e9))
+* [E4E-87]: Update libraries; do some lint fixes ([5431c56](https://github.com/nrccua/apollo-rest-utils/commit/5431c56acee25b948edaccf85630d9bfdb78bfec))
+* [E4E-87]: 1.3.3 ([b5d8961](https://github.com/nrccua/apollo-rest-utils/commit/b5d896118af5f7767c1a17b27b1adfe288dc1002))
+
+### [1.3.3](https://github.com/nrccua/apollo-rest-utils/compare/1.3.2...1.3.3) (2022-01-07)
+
+### Changes
+
+* [E4E-87]: Finally getting these input types to work + tests ([e52136b](https://github.com/nrccua/apollo-rest-utils/commit/e52136b34233105cab091a889389c6d5d0e9de20))
+* [E4E-87]: 1.3.2 ([b2d38d5](https://github.com/nrccua/apollo-rest-utils/commit/b2d38d5655eca628775cf63b7da2e20c2b2b1670))
+
+### [1.3.2](https://github.com/nrccua/apollo-rest-utils/compare/1.3.1...1.3.2) (2022-01-07)
 
 ### Changes
 
@@ -12,14 +47,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.3.1](https://github.com/nrccua/apollo-rest-utils/compare/1.3.0...1.3.1) (2022-01-07)
 
-
 ### Changes
 
 * [E4E-87]: Allow an empty input body to be passed to be passed in variables ([4b67e40](https://github.com/nrccua/apollo-rest-utils/commit/4b67e4033b6773a682b4363224076e9dcdf0f828))
 * [E4E-87]: 1.3.0 ([cbda2b6](https://github.com/nrccua/apollo-rest-utils/commit/cbda2b6cef2483571b99b99943777aafb21c2449))
 
 ## [1.3.0](https://github.com/nrccua/apollo-rest-utils/compare/1.2.2...1.3.0) (2022-01-06)
-
 
 ### Changes
 
@@ -30,7 +63,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.2.2](https://github.com/nrccua/apollo-rest-utils/compare/1.2.1...1.2.2) (2021-12-09)
 
-
 ### Changes
 
 * [E4E-0]: Only support 14 + 16 ([71f44cc](https://github.com/nrccua/apollo-rest-utils/commit/71f44cc8622bf69e8caa8951e30d316edf4bcdd4))
@@ -40,7 +72,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.2.1](https://github.com/nrccua/apollo-rest-utils/compare/1.2.0...1.2.1) (2021-12-08)
 
-
 ### Changes
 
 * [E4E-58]: Add helper rest type extractors ([fc0fbad](https://github.com/nrccua/apollo-rest-utils/commit/fc0fbad7435a5217ade6857bd6be006bfd8e000a))
@@ -48,7 +79,6 @@ All notable changes to this project will be documented in this file. See [standa
 * [E4E-0]: 1.2.0 ([ebc7c39](https://github.com/nrccua/apollo-rest-utils/commit/ebc7c39cfc44ec99fa92ef274f85a0b4ff3b39dc))
 
 ## [1.2.0](https://github.com/nrccua/apollo-rest-utils/compare/1.1.1...1.2.0) (2021-12-06)
-
 
 ### Changes
 
@@ -59,7 +89,6 @@ All notable changes to this project will be documented in this file. See [standa
 * [E4E-14]: Add eslint as a devDependency ([66613e4](https://github.com/nrccua/apollo-rest-utils/commit/66613e40b67d7151d414f9123333b1529af4c65b))
 
 ### [1.1.1](https://github.com/nrccua/apollo-rest-utils/compare/1.1.0...1.1.1) (2021-12-03)
-
 
 ### Changes
 
@@ -76,14 +105,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.1.0](https://github.com/nrccua/apollo-rest-utils/compare/1.0.14...1.1.0) (2021-11-29)
 
-
 ### Changes
 
 * [E4E-30]: Add ability to specify an endpoint id ([dd01aea](https://github.com/nrccua/apollo-rest-utils/commit/dd01aea0daad0fbf64e7ee358c4a34d571456c82))
 * [E4E-30]: 1.0.14 ([191a478](https://github.com/nrccua/apollo-rest-utils/commit/191a47871b111b63aa9444538e5d45f3fcd9ab99))
 
 ### [1.0.14](https://github.com/nrccua/apollo-rest-utils/compare/1.0.13...1.0.14) (2021-11-24)
-
 
 ### Changes
 
@@ -92,14 +119,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.13](https://github.com/nrccua/apollo-rest-utils/compare/1.0.12...1.0.13) (2021-11-22)
 
-
 ### Changes
 
 * [E4E-30]: Typo inception ([4fef9ae](https://github.com/nrccua/apollo-rest-utils/commit/4fef9ae4d34446801259ad4ea4992fbed1c6dcc2))
 * [E4E-30]: 1.0.12 ([17195db](https://github.com/nrccua/apollo-rest-utils/commit/17195db1caaea1f94c3586a644975fa2581e54bc))
 
 ### [1.0.12](https://github.com/nrccua/apollo-rest-utils/compare/1.0.11...1.0.12) (2021-11-22)
-
 
 ### Changes
 
@@ -108,14 +133,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.11](https://github.com/nrccua/apollo-rest-utils/compare/1.0.10...1.0.11) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30]:ApolloClient<object> ([ae6db2a](https://github.com/nrccua/apollo-rest-utils/commit/ae6db2a5c13366b7df670b501b1d4f14460f8308))
 * [E4E-30]: 1.0.10 ([6bce871](https://github.com/nrccua/apollo-rest-utils/commit/6bce871f8c23f80affc1493a5f75463995e09203))
 
 ### [1.0.10](https://github.com/nrccua/apollo-rest-utils/compare/1.0.9...1.0.10) (2021-11-21)
-
 
 ### Changes
 
@@ -124,14 +147,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.9](https://github.com/nrccua/apollo-rest-utils/compare/1.0.8...1.0.9) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30]: Allow ApolloClient<any> for dowstream flexibility ([a8e0b0f](https://github.com/nrccua/apollo-rest-utils/commit/a8e0b0f8feba57b171fa6aaf40fc07e257cc0430))
 * [E4E-30]: 1.0.8 ([c2be2d5](https://github.com/nrccua/apollo-rest-utils/commit/c2be2d5722c6564e590449a63f5d20f71b319189))
 
 ### [1.0.8](https://github.com/nrccua/apollo-rest-utils/compare/1.0.7...1.0.8) (2021-11-21)
-
 
 ### Changes
 
@@ -140,14 +161,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.7](https://github.com/nrccua/apollo-rest-utils/compare/1.0.6...1.0.7) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30]: Fix build script to generate restSchema files ([41dd938](https://github.com/nrccua/apollo-rest-utils/commit/41dd938260be9966c048305aa9f19a8b063be45b))
 * [E4E-30]: 1.0.6 ([c96cf93](https://github.com/nrccua/apollo-rest-utils/commit/c96cf93c4b46f2b361a6ee9e5e1b55ee1e66796b))
 
 ### [1.0.6](https://github.com/nrccua/apollo-rest-utils/compare/1.0.5...1.0.6) (2021-11-21)
-
 
 ### Changes
 
@@ -157,14 +176,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.5](https://github.com/nrccua/apollo-rest-utils/compare/1.0.4...1.0.5) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30] Specify node as the shell for the executable and chmod ([7775766](https://github.com/nrccua/apollo-rest-utils/commit/7775766850dd01ac6fbf23503b7908cc80e7b741))
 * [E4E-30]: 1.0.4 ([5526410](https://github.com/nrccua/apollo-rest-utils/commit/5526410bb34eb59b5ad66bef34f2508382072fd8))
 
 ### [1.0.4](https://github.com/nrccua/apollo-rest-utils/compare/1.0.3...1.0.4) (2021-11-21)
-
 
 ### Changes
 
@@ -173,14 +190,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.3](https://github.com/nrccua/apollo-rest-utils/compare/1.0.2...1.0.3) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30]: Fix issue with no bin being generated on downstream ([391e872](https://github.com/nrccua/apollo-rest-utils/commit/391e87273a95f2303ada672578a53b24e769b18b))
 * [E4E-30]: 1.0.2 ([ea5ddff](https://github.com/nrccua/apollo-rest-utils/commit/ea5ddffab510578181cb9f66759dcf3751859be3))
 
 ### [1.0.2](https://github.com/nrccua/apollo-rest-utils/compare/1.0.1...1.0.2) (2021-11-21)
-
 
 ### Changes
 
@@ -189,14 +204,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.1](https://github.com/nrccua/apollo-rest-utils/compare/1.0.0...1.0.1) (2021-11-21)
 
-
 ### Changes
 
 * [E4E-30]: Port of existing code from private repo ([7691b31](https://github.com/nrccua/apollo-rest-utils/commit/7691b3185ce2f06a6d7f6981a318f346b6c84fa3))
 * [E4E-30]: Add standard-version initial CHANGELOG ([5c3b975](https://github.com/nrccua/apollo-rest-utils/commit/5c3b9755144880be47f7bd6b68879e438470fc0e))
 
 ## 1.0.0 (2021-11-20)
-
 
 ### Changes
 

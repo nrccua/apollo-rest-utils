@@ -29,7 +29,7 @@ export type RestRequest<T> = T extends IRestEndpoint<unknown, infer U> ? U : nev
 // 1. All fields to put into an input object
 // or
 // 2. Allow an empty input object to overcome a bug in apollo-link-rest where PATCH/POST/PUT barfs with no body
-export type Input<T> = (T & { input?: Record<string, never> }) | { input: T };
+export type Input<T> = T | (T & { input?: Record<string, never> }) | { input: T };
 
 export interface IEndpointOptions<T, U> {
   endpoint: IRestEndpoint<T, U>;
