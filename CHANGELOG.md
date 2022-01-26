@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/nrccua/apollo-rest-utils/compare/1.4.4...1.4.5) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Allow $headers to be included in variables to queries ([d5585ab](https://github.com/nrccua/apollo-rest-utils/commit/d5585abfed15e41d5c21deb5361fa3272aa4fae2))
+* [E4E-0]: 1.4.4 ([2e42d47](https://github.com/nrccua/apollo-rest-utils/commit/2e42d47c5f1fc15715be03c182525cdeab28b6f9))
+
 ### [1.4.4](https://github.com/nrccua/apollo-rest-utils/compare/1.4.3...1.4.4) (2022-01-26)
 
 
