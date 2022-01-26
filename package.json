@@ -60,7 +60,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:dist",
-    "build:dist": "tsc $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
+    "build:dist": "./node_modules/typescript/bin/tsc $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
     "clean": "rm -rf dist && ([ -z \"$(pwd | grep node_modules)\"] || rm -rf package-lock.json) # Remove the package-lock.json when this is used as a library so that any version of node can be used with it",
     "clean:full": "npm run clean && rm -rf node_modules",
     "postinstall": "npm run build",
@@ -78,5 +78,5 @@
     "update:version:major": "standard-version --release-as major && npm run test:lint:md",
     "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.4.3"
+  "version": "1.4.2"
 }
