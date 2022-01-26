@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/nrccua/apollo-rest-utils/compare/1.4.3...1.4.4) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Make tsc discovery more intelligent ([6ae2b57](https://github.com/nrccua/apollo-rest-utils/commit/6ae2b57f0ec4e11cc3043f43ed43f796b5dcd4d2))
+* [E4E-0]: 1.4.3 (second try?) ([d30862d](https://github.com/nrccua/apollo-rest-utils/commit/d30862de7ee33c849d761e25012a676c7149c750))
+
 ### [1.4.3](https://github.com/nrccua/apollo-rest-utils/compare/1.4.2...1.4.3) (2022-01-26)
 
 
