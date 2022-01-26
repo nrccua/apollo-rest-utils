@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changes
 
+* [E4E-0]: Fix build:dist to ref the path of tsc ([272279c](https://github.com/nrccua/apollo-rest-utils/commit/272279c3d76e5bebc99424c5ea01f926db743795))
+* [E4E-0]: 1.4.3 ([5d95afa](https://github.com/nrccua/apollo-rest-utils/commit/5d95afa9f2f8c53b6cc8d557265c5c26583a240a))
 * [E4E-0]: Add Typescript as a peerDependency ([12d900b](https://github.com/nrccua/apollo-rest-utils/commit/12d900b59ef55cefc83972b3322ef6b4ecfab325))
 * [E4E-87]: 1.4.2 (fixed) ([7de858b](https://github.com/nrccua/apollo-rest-utils/commit/7de858bee2ccdd320071eedbaad4d3b3fe3c29d6))
 
