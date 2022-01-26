@@ -120,6 +120,48 @@ describe('useRestQuery Library', () => {
     expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
 
+  it('wrapRestMutation should create a function that allows $headers', async () => {
+    const testToken = 'TEST_TOKEN';
+    const mockResult = {
+      called: true,
+      client: new MockApolloClient() as unknown as ApolloClient<unknown>,
+      data: { refreshToken: { sessionToken: testToken } },
+      loading: false,
+    };
+
+    useMutationMock.mockReturnValue([async (): Promise<typeof mockResult> => Promise.resolve(mockResult), mockResult]);
+
+    const wrappedRestMutation = wrapRestMutation<'refreshToken'>();
+    const [refreshToken] = wrappedRestMutation(
+      gql`
+        mutation TestMutationB088D1CCBE7C($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      { endpoint: dummyEndpoint },
+    );
+    const result = await refreshToken({
+      variables: {
+        $headers: {
+          'x-api-key': '12345',
+        },
+        input: {
+          testInput: 'test',
+        },
+      },
+    });
+
+    expect(result.data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useMutationMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
+  });
+
   it('wrapRestQuery should create a function that returns results via useQuery', () => {
     const testToken = 'TEST_TOKEN';
     useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
@@ -240,6 +282,39 @@ describe('useRestQuery Library', () => {
 
     // Make sure our @rest gql got injected with the optional
     expect(print(generatedNode)).toContain('?optional={args.optional}');
+  });
+
+  it('wrapRestQuery should create a function that allows $headers', () => {
+    const testToken = 'TEST_TOKEN';
+    useQueryMock.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestQuery<'refreshToken'>();
+    const { data } = wrappedRestQuery(
+      gql`
+        query TestQuery2067FE118166($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      {
+        endpoint: dummyEndpoint,
+        variables: {
+          $headers: {
+            'x-api-key': '12345',
+          },
+          testInput: 'test',
+        },
+      },
+    );
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = first(first(useQueryMock.mock.calls)) as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
 
   it('wrapRestClientQuery should create a function that returns results via client.query', async () => {
@@ -374,6 +449,42 @@ describe('useRestQuery Library', () => {
 
     // Make sure our @rest gql got injected without the optional
     expect(print(generatedNode)).toContain('?optional={args.optional}');
+  });
+
+  it('wrapRestClientQuery should create a function that allows $headers', async () => {
+    const testToken = 'TEST_TOKEN';
+    const clientMock = new MockApolloClient();
+
+    clientMock.query.mockReturnValue({ data: { refreshToken: { sessionToken: testToken } } });
+
+    const wrappedRestQuery = wrapRestClientQuery<'refreshToken'>();
+
+    const { data } = await wrappedRestQuery({
+      client: clientMock as unknown as ApolloClient<object>,
+      endpoint: dummyEndpoint,
+      query: gql`
+        query TestClientQuery3F3C1DCCA1E2($input: input) {
+          refreshToken(input: $input) {
+            sessionToken
+          }
+        }
+      `,
+      variables: {
+        $headers: {
+          'x-api-key': '12345',
+        },
+        testInput: 'test',
+      },
+    });
+
+    expect(data?.refreshToken.sessionToken).toBe(testToken);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const generatedNode = (first(first(clientMock.query.mock.calls)) as Parameters<typeof wrappedRestQuery>[0])
+      ?.query as DocumentNode;
+
+    // Make sure our @rest gql got injected
+    expect(print(generatedNode)).toContain(dummyEndpoint.gql);
   });
 });
 

@@ -19,7 +19,15 @@ import { DirectiveNode, FieldNode, OperationDefinitionNode } from 'graphql';
 import { print } from 'graphql/language/printer';
 import { get } from 'lodash';
 
-import { IEndpointOptions, getSchemaField, Input, InvalidQueryError, IRestEndpoint, NamedGQLResult } from '../types';
+import {
+  IEndpointOptions,
+  getSchemaField,
+  Input,
+  InvalidQueryError,
+  IRestEndpoint,
+  NamedGQLResult,
+  WithHeaders,
+} from '../types';
 
 function stripOptionals(gqlQuery: string, variables?: Record<string, unknown>): string {
   const args = Array.from(gqlQuery.matchAll(/{args.([^}]*)}/g)).map(m => m[1]);
@@ -36,7 +44,7 @@ function stripOptionals(gqlQuery: string, variables?: Record<string, unknown>): 
 
 export function validateQueryAgainstEndpoint<TName extends string, TData = unknown, TVariables = OperationVariables>(
   query: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
-  endpoint: IRestEndpoint<NamedGQLResult<TName, TData>, Input<TVariables>>,
+  endpoint: IRestEndpoint<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>>,
 ): void {
   if (query.definitions.length !== 1) {
     throw new InvalidQueryError('Query must contain exactly one definition', query, endpoint);
@@ -107,7 +115,7 @@ export function useRestMutation<
   TCache extends ApolloCache<any> = ApolloCache<any>,
 >(
   mutation: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
-  options: IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
+  options: IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
     MutationHookOptions<NamedGQLResult<TName, TData>, TVariables, TContext>,
 ): MutationTuple<NamedGQLResult<TName, TData>, Input<TVariables>, TContext, TCache> {
   validateQueryAgainstEndpoint(mutation, options.endpoint);
@@ -166,19 +174,19 @@ export function wrapRestMutation<TName extends string>() {
   >(
     mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options: IEndpointOptions<TData, TVariables> & MutationHookOptions<TData, TVariables, TContext>,
-  ): MutationTuple<NamedGQLResult<TName, TData>, Input<TVariables>, TContext, TCache> =>
+  ): MutationTuple<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>, TContext, TCache> =>
     useRestMutation(
       mutation,
-      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
-        MutationHookOptions<NamedGQLResult<TName, TData>, TVariables, TContext>,
+      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
+        MutationHookOptions<NamedGQLResult<TName, TData>, WithHeaders<TVariables>, TContext>,
     );
 }
 
 export function useRestQuery<TName extends string, TData, TVariables>(
   query: DocumentNode | TypedDocumentNode<NamedGQLResult<TName, TData>, TVariables>,
-  options: IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
+  options: IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
     QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>,
-): QueryResult<NamedGQLResult<TName, TData>, Input<TVariables>> {
+): QueryResult<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> {
   validateQueryAgainstEndpoint(query, options.endpoint);
   const directives = (query.definitions[0] as OperationDefinitionNode).selectionSet.selections[0]
     .directives as DirectiveNode[];
@@ -195,9 +203,9 @@ export function useRestQuery<TName extends string, TData, TVariables>(
   // eslint-disable-next-line no-console, sort-keys
   console.debug('useRestQuery', { query: print(query), options });
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return useQuery<NamedGQLResult<TName, TData>, Input<TVariables>>(
+  return useQuery<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>>(
     query,
-    options as QueryHookOptions<NamedGQLResult<TName, TData>, Input<TVariables>>,
+    options as QueryHookOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>>,
   );
 }
 
@@ -231,17 +239,17 @@ export function useRestQuery<TName extends string, TData, TVariables>(
 export function wrapRestQuery<TName extends string>() {
   return <TData, TVariables>(
     query: DocumentNode | TypedDocumentNode<TData, TVariables>,
-    options: IEndpointOptions<TData, TVariables> & QueryHookOptions<TData, Input<TVariables>>,
-  ): QueryResult<NamedGQLResult<TName, TData>, Input<TVariables>> =>
+    options: IEndpointOptions<TData, TVariables> & QueryHookOptions<TData, WithHeaders<Input<TVariables>>>,
+  ): QueryResult<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> =>
     useRestQuery(
       query,
-      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
+      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
         QueryHookOptions<NamedGQLResult<TName, TData>, TVariables>,
     );
 }
 
 export function useRestClientQuery<TName extends string, TData, TVariables>(
-  options: IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
+  options: IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
     QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<object> },
 ): Promise<ApolloQueryResult<NamedGQLResult<TName, TData>>> {
   validateQueryAgainstEndpoint(options.query, options.endpoint);
@@ -294,10 +302,10 @@ export function wrapRestClientQuery<TName extends string>() {
   return <TData, TVariables>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: IEndpointOptions<TData, TVariables> &
-      QueryOptions<Input<TVariables>, TData> & { client: ApolloClient<object> },
+      QueryOptions<WithHeaders<Input<TVariables>>, TData> & { client: ApolloClient<object> },
   ): Promise<ApolloQueryResult<NamedGQLResult<TName, TData>>> =>
     useRestClientQuery(
-      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, Input<TVariables>> &
+      options as unknown as IEndpointOptions<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>> &
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         QueryOptions<TVariables, NamedGQLResult<TName, TData>> & { client: ApolloClient<object> },
     );

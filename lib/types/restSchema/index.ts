@@ -25,6 +25,8 @@ export type RestResponse<T> = T extends IRestEndpoint<infer U, unknown> ? U : ne
 
 export type RestRequest<T> = T extends IRestEndpoint<unknown, infer U> ? U : never;
 
+export type WithHeaders<T> = T & { $headers?: Record<string, string> };
+
 // Allow for either:
 // 1. All fields to put into an input object
 // or
