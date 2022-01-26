@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/nrccua/apollo-rest-utils/compare/1.4.2...1.4.3) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Add Typescript as a peerDependency ([12d900b](https://github.com/nrccua/apollo-rest-utils/commit/12d900b59ef55cefc83972b3322ef6b4ecfab325))
+* [E4E-87]: 1.4.2 (fixed) ([7de858b](https://github.com/nrccua/apollo-rest-utils/commit/7de858bee2ccdd320071eedbaad4d3b3fe3c29d6))
+
 ### [1.4.2](https://github.com/nrccua/apollo-rest-utils/compare/1.4.1...1.4.2) (2022-01-19)
 
 
