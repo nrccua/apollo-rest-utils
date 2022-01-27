@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.7](https://github.com/nrccua/apollo-rest-utils/compare/1.4.6...1.4.7) (2022-01-27)
+
+
+### Changes
+
+* [E4E-0]: Fix unit testsfor HeadersLink ([cebadb9](https://github.com/nrccua/apollo-rest-utils/commit/cebadb975636a2983c31f3c6cf19caef95fab3f9))
+* [E4E-0]: Inject metadata into headers for caching ([02cf5e5](https://github.com/nrccua/apollo-rest-utils/commit/02cf5e59b34b93d623f8422ecfe57dbac178aaf5))
+* [E4E-0]: Fix shell script error ([8b951ab](https://github.com/nrccua/apollo-rest-utils/commit/8b951aba2e9a18f41352a413bfc31419e7ed96b3))
+* [E4E-0]: Add tests for debug ([2a572ca](https://github.com/nrccua/apollo-rest-utils/commit/2a572caf57c6405087447f882c34bf26c260c421))
+* [E4E-0]: 1.4.6 ([6f1d260](https://github.com/nrccua/apollo-rest-utils/commit/6f1d26077b1df4fec8db68c7fcea957d5cecff38))
+
 ### [1.4.6](https://github.com/nrccua/apollo-rest-utils/compare/1.4.5...1.4.6) (2022-01-27)
 
 
