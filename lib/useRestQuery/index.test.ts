@@ -63,7 +63,7 @@ describe('useRestQuery Library', () => {
           }
         }
       `,
-      { endpoint: dummyEndpoint },
+      { debug: true, endpoint: dummyEndpoint },
     );
     const result = await refreshToken({
       variables: {
@@ -176,6 +176,7 @@ describe('useRestQuery Library', () => {
         }
       `,
       {
+        debug: true,
         endpoint: dummyEndpoint,
         variables: {
           testInput: 'test',
@@ -327,6 +328,7 @@ describe('useRestQuery Library', () => {
 
     const { data } = await wrappedRestQuery({
       client: clientMock as unknown as ApolloClient<object>,
+      debug: true,
       endpoint: dummyEndpoint,
       query: gql`
         query TestClientQuery3F3C1DCCA1E2($input: input) {
