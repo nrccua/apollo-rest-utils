@@ -35,6 +35,7 @@ export type Input<T> = T | (T & { input?: Record<string, never> }) | { input: T 
 
 export interface IEndpointOptions<T, U> {
   endpoint: IRestEndpoint<T, U>;
+  debug?: boolean;
 }
 
 export type NamedGQLResult<Name extends string, TData = unknown> = {

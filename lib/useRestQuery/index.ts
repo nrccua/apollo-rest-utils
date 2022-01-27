@@ -128,8 +128,10 @@ export function useRestMutation<
     directives.push(dummyDirectives[0]);
   }
 
-  // eslint-disable-next-line no-console
-  console.debug('useRestMutation', { mutation: print(mutation), options });
+  if (options.debug) {
+    // eslint-disable-next-line no-console
+    console.debug('useRestMutation', { mutation: print(mutation), options });
+  }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useMutation<NamedGQLResult<TName, TData>, Input<TVariables>, TContext, TCache>(
     mutation,
@@ -200,8 +202,10 @@ export function useRestQuery<TName extends string, TData, TVariables>(
     directives.push(dummyDirectives[0]);
   }
 
-  // eslint-disable-next-line no-console, sort-keys
-  console.debug('useRestQuery', { query: print(query), options });
+  if (options.debug) {
+    // eslint-disable-next-line no-console, sort-keys
+    console.debug('useRestQuery', { query: print(query), options });
+  }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery<NamedGQLResult<TName, TData>, WithHeaders<Input<TVariables>>>(
     query,
@@ -265,9 +269,10 @@ export function useRestClientQuery<TName extends string, TData, TVariables>(
     directives.push(dummyDirectives[0]);
   }
 
-  // eslint-disable-next-line no-console, sort-keys
-  console.debug('useRestClientQuery', { query: print(options.query), options });
-
+  if (options.debug) {
+    // eslint-disable-next-line no-console, sort-keys
+    console.debug('useRestClientQuery', { query: print(options.query), options });
+  }
   return options.client.query<NamedGQLResult<TName, TData>, TVariables>(options);
 }
 
