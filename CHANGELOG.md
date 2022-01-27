@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.6](https://github.com/nrccua/apollo-rest-utils/compare/1.4.5...1.4.6) (2022-01-27)
+
+
+### Changes
+
+* [E4E-0]: Make debug optional (happy @gsimionato-daitan ?) ([004c401](https://github.com/nrccua/apollo-rest-utils/commit/004c401f231d264b239b1d35f18fd71c6de416a9))
+* [E4E-0]: 1.4.5 ([13ff258](https://github.com/nrccua/apollo-rest-utils/commit/13ff258207807780c97107d671a65490b297800b))
+
 ### [1.4.5](https://github.com/nrccua/apollo-rest-utils/compare/1.4.4...1.4.5) (2022-01-26)
 
 
