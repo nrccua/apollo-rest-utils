@@ -1,5 +1,19 @@
+import { randomUUID } from 'crypto';
+
 import { ApolloLink, FetchResult, NextLink, Observable, Operation } from '@apollo/client';
-import { camelCase, get } from 'lodash';
+import { camelCase, first } from 'lodash';
+
+interface IRestResponse {
+  body?: unknown;
+  bodyUsed?: boolean;
+  headers?: Map<string, unknown>;
+  ok?: boolean;
+  redirected?: boolean;
+  status: number;
+  statusText?: string;
+  type?: string;
+  url: string;
+}
 
 export class HeadersLink extends ApolloLink {
   // eslint-disable-next-line class-methods-use-this
@@ -7,10 +21,14 @@ export class HeadersLink extends ApolloLink {
     return forward(operation).map((response): Record<string, unknown> => {
       const context = operation.getContext();
 
-      const headersMap = (get(context, 'restResponses[0].headers') as Map<string, unknown>) || new Map();
-      const headersObj: Record<string, unknown> = Object.fromEntries(headersMap);
+      const restResponse = first(context.restResponses as IRestResponse[]);
+      const headersMap = restResponse?.headers ?? new Map();
+      const headersObj = Object.fromEntries(headersMap) as Record<string, unknown>;
 
-      const headersObjCamelCased: Record<string, unknown> = {};
+      const headersObjCamelCased: Record<string, unknown> = {
+        __typename: 'headers',
+        _id: restResponse?.url ?? randomUUID(),
+      };
       Object.keys(headersObj).forEach((key): void => {
         headersObjCamelCased[camelCase(key)] = headersObj[key];
       });

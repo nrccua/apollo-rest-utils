@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.7](https://github.com/nrccua/apollo-rest-utils/compare/1.4.6...1.4.7) (2022-01-27)
+
+
+### Changes
+
+* [E4E-0]: Fix unit testsfor HeadersLink ([cebadb9](https://github.com/nrccua/apollo-rest-utils/commit/cebadb975636a2983c31f3c6cf19caef95fab3f9))
+* [E4E-0]: Inject metadata into headers for caching ([02cf5e5](https://github.com/nrccua/apollo-rest-utils/commit/02cf5e59b34b93d623f8422ecfe57dbac178aaf5))
+* [E4E-0]: Fix shell script error ([8b951ab](https://github.com/nrccua/apollo-rest-utils/commit/8b951aba2e9a18f41352a413bfc31419e7ed96b3))
+* [E4E-0]: Add tests for debug ([2a572ca](https://github.com/nrccua/apollo-rest-utils/commit/2a572caf57c6405087447f882c34bf26c260c421))
+* [E4E-0]: 1.4.6 ([6f1d260](https://github.com/nrccua/apollo-rest-utils/commit/6f1d26077b1df4fec8db68c7fcea957d5cecff38))
+
+### [1.4.6](https://github.com/nrccua/apollo-rest-utils/compare/1.4.5...1.4.6) (2022-01-27)
+
+
+### Changes
+
+* [E4E-0]: Make debug optional (happy @gsimionato-daitan ?) ([004c401](https://github.com/nrccua/apollo-rest-utils/commit/004c401f231d264b239b1d35f18fd71c6de416a9))
+* [E4E-0]: 1.4.5 ([13ff258](https://github.com/nrccua/apollo-rest-utils/commit/13ff258207807780c97107d671a65490b297800b))
+
+### [1.4.5](https://github.com/nrccua/apollo-rest-utils/compare/1.4.4...1.4.5) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Allow $headers to be included in variables to queries ([d5585ab](https://github.com/nrccua/apollo-rest-utils/commit/d5585abfed15e41d5c21deb5361fa3272aa4fae2))
+* [E4E-0]: 1.4.4 ([2e42d47](https://github.com/nrccua/apollo-rest-utils/commit/2e42d47c5f1fc15715be03c182525cdeab28b6f9))
+
+### [1.4.4](https://github.com/nrccua/apollo-rest-utils/compare/1.4.3...1.4.4) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Make tsc discovery more intelligent ([6ae2b57](https://github.com/nrccua/apollo-rest-utils/commit/6ae2b57f0ec4e11cc3043f43ed43f796b5dcd4d2))
+* [E4E-0]: 1.4.3 (second try?) ([d30862d](https://github.com/nrccua/apollo-rest-utils/commit/d30862de7ee33c849d761e25012a676c7149c750))
+
+### [1.4.3](https://github.com/nrccua/apollo-rest-utils/compare/1.4.2...1.4.3) (2022-01-26)
+
+
+### Changes
+
+* [E4E-0]: Fix build:dist to ref the path of tsc ([272279c](https://github.com/nrccua/apollo-rest-utils/commit/272279c3d76e5bebc99424c5ea01f926db743795))
+* [E4E-0]: 1.4.3 ([5d95afa](https://github.com/nrccua/apollo-rest-utils/commit/5d95afa9f2f8c53b6cc8d557265c5c26583a240a))
+* [E4E-0]: Add Typescript as a peerDependency ([12d900b](https://github.com/nrccua/apollo-rest-utils/commit/12d900b59ef55cefc83972b3322ef6b4ecfab325))
+* [E4E-87]: 1.4.2 (fixed) ([7de858b](https://github.com/nrccua/apollo-rest-utils/commit/7de858bee2ccdd320071eedbaad4d3b3fe3c29d6))
+
 ### [1.4.2](https://github.com/nrccua/apollo-rest-utils/compare/1.4.1...1.4.2) (2022-01-19)
 
 
