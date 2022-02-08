@@ -1,14 +1,14 @@
 name: Publish
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
     steps:
     - uses: actions/checkout@v2
@@ -17,6 +17,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
+        registry-url: 'https://npm.pkg.github.com'
+        # Defaults to the user or organization that owns the workflow file
+        scope: ''
     - name: Cache node modules
       uses: actions/cache@v2
       env:
@@ -34,4 +37,6 @@ jobs:
     - run: npm i
     - run: npm run test
     - run: npm run build
-    - run: npm publish 
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

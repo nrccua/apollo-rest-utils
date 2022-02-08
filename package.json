@@ -62,7 +62,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nrccua/apollo-rest-utils.git"
+    "url": "https://github.com/nrccua/apollo-rest-utils.git"
   },
   "scripts": {
     "build": "npm run clean && npm run build:dist",
@@ -83,5 +83,5 @@
     "update:version:major": "standard-version --release-as major && npm run test:lint:md",
     "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.5.0"
+  "version": "1.5.1"
 }
