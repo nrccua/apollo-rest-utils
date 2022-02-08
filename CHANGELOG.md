@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/nrccua/apollo-rest-utils/compare/1.4.7...1.5.0) (2022-02-08)
+
+
+### Changes
+
+* [E4E-0]: Attempt to use GitHub packages for dist ([c985701](https://github.com/nrccua/apollo-rest-utils/commit/c9857019b3296b619208b71baf5c5fb84d3ce94f))
+* Merge pull request #16 from nrccua/fix/ts_downstream_to_r3 ([5cc33b8](https://github.com/nrccua/apollo-rest-utils/commit/5cc33b8ccab67c455a38517b7d0d228befbf55f6)), closes [#16](https://github.com/nrccua/apollo-rest-utils/issues/16)
+* [E4E-0]: 1.4.7 ([fed20cf](https://github.com/nrccua/apollo-rest-utils/commit/fed20cf53952aae374b9b2c6375b17658a9ebe2b))
+* Merge pull request #15 from nrccua/fix/missing_path_params ([9dd8379](https://github.com/nrccua/apollo-rest-utils/commit/9dd8379923c1ee640f7e8881ef193872fbeadad1)), closes [#15](https://github.com/nrccua/apollo-rest-utils/issues/15)
+* Merge pull request #14 from nrccua/fix/missing_path_params ([08b7f9b](https://github.com/nrccua/apollo-rest-utils/commit/08b7f9b1cf759ec54320a72ad77cb7629b7912a0)), closes [#14](https://github.com/nrccua/apollo-rest-utils/issues/14)
+* Merge pull request #13 from nrccua/fix/missing_path_params ([9b72b48](https://github.com/nrccua/apollo-rest-utils/commit/9b72b48f270f31566148264e5994033ef2967740)), closes [#13](https://github.com/nrccua/apollo-rest-utils/issues/13)
+
 ### [1.4.7](https://github.com/nrccua/apollo-rest-utils/compare/1.4.6...1.4.7) (2022-01-27)
 
 

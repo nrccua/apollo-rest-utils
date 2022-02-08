@@ -41,6 +41,9 @@
     "ts-jest": "27.0.7",
     "typescript": "4.5.2"
   },
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/nrccua/apollo-rest-utils#readme",
   "keywords": [
     "rest",
@@ -54,16 +57,18 @@
   "peerDependencies": {
     "typescript": "4.5.2"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nrccua/apollo-rest-utils.git"
+    "url": "git://github.com/nrccua/apollo-rest-utils.git"
   },
   "scripts": {
     "build": "npm run clean && npm run build:dist",
-    "build:dist": "npm run tsc -- $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
-    "clean": "rm -rf dist && ([ -z \"$(pwd | grep node_modules)\" ] || rm -rf package-lock.json) # Remove the package-lock.json when this is used as a library so that any version of node can be used with it",
+    "build:dist": "tsc $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
+    "clean": "rm -rf dist",
     "clean:full": "npm run clean && rm -rf node_modules",
-    "postinstall": "npm run build",
     "prepare": "husky install && git config --local push.followTags true",
     "removetag": "git tag -d $npm_config_tag && git push --delete origin $npm_config_tag",
     "removetag:help": "echo Usage: npm run removetag --tag=<tag>",
@@ -74,11 +79,9 @@
     "test:prettier": "prettier --write './**/*.js' './**/*.ts'",
     "test:types": "tsc --project ./tsconfig.json --noEmit",
     "test:unit": "NODE_ENV=test jest --silent --coverage",
-    "tsc": "$(npm run tsc:location --silent)",
-    "tsc:location": "[ -e \"./node_modules/.bin/tsc\" ] && echo 'tsc' || echo '../typescript/bin/tsc'",
     "update:version": "standard-version && npm run test:lint:md",
     "update:version:major": "standard-version --release-as major && npm run test:lint:md",
     "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.4.7"
+  "version": "1.5.0"
 }
