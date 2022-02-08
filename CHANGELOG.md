@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/nrccua/apollo-rest-utils/compare/1.5.1...1.5.2) (2022-02-08)
+
+
+### Changes
+
+* [E4E-0]: Adapt to GH's naming standards ([e5d1315](https://github.com/nrccua/apollo-rest-utils/commit/e5d1315a81fa67e9a25337590695e651c6e049b0))
+* [E4E-0]: 1.5.1 ([e37c7f6](https://github.com/nrccua/apollo-rest-utils/commit/e37c7f62569bad633224524152cdec8f6be0c90a))
+
 ### [1.5.1](https://github.com/nrccua/apollo-rest-utils/compare/1.5.0...1.5.1) (2022-02-08)
 
 
