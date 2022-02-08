@@ -53,7 +53,7 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "name": "apollo-rest-utils",
+  "name": "@nrccua/apollo-rest-utils",
   "peerDependencies": {
     "typescript": "4.5.2"
   },
