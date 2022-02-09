@@ -50,7 +50,7 @@ describe('generateTypescript', () => {
 
       const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
 
-      const tsData = generateTypescript(api, typeImport).replace(/apollo-rest-utils/g, '../../lib');
+      const tsData = generateTypescript(api, typeImport).replace(/@encoura\/apollo-rest-utils/g, '../../lib');
 
       expect(tsData).toBeTruthy(); // Not empty, null, or undefined
 
@@ -67,7 +67,7 @@ describe('generateTypescript', () => {
 
     const typeImport = await generateTypes(apiPath, path.join(buildFolder, `${randomUUID()}_types.ts`));
 
-    const tsData = generateTypescript(api, typeImport, 'TEST').replace(/apollo-rest-utils/g, '../../lib');
+    const tsData = generateTypescript(api, typeImport, 'TEST').replace(/@encoura\/apollo-rest-utils/g, '../../lib');
 
     expect(tsData).toBeTruthy(); // Not empty, null, or undefined
 

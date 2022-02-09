@@ -216,10 +216,10 @@ export function generateTypescript(api: OpenAPI.Document, typeImportLocation: st
   // eslint-disable-next-line lodash/prefer-includes
   if (generatedTSEndpoints.indexOf('Input<') > -1) {
     // eslint-disable-next-line max-len
-    generatedTSEndpoints = `${warningHeader}import { paths } from '${typeImportLocation}'\n\nimport { IRestEndpoint, Input } from 'apollo-rest-utils';\n\n\n${generatedTSEndpoints}`;
+    generatedTSEndpoints = `${warningHeader}import { paths } from '${typeImportLocation}'\n\nimport { IRestEndpoint, Input } from '@encoura/apollo-rest-utils';\n\n\n${generatedTSEndpoints}`;
   } else {
     // eslint-disable-next-line max-len
-    generatedTSEndpoints = `${warningHeader}import { paths } from '${typeImportLocation}'\n\nimport { IRestEndpoint } from 'apollo-rest-utils';\n\n\n${generatedTSEndpoints}`;
+    generatedTSEndpoints = `${warningHeader}import { paths } from '${typeImportLocation}'\n\nimport { IRestEndpoint } from '@encoura/apollo-rest-utils';\n\n\n${generatedTSEndpoints}`;
   }
 
   return generatedTSEndpoints;

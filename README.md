@@ -37,7 +37,7 @@ npx apollo-rest-utils <path_to_swagger_file_or_url> <output_directory_where_you_
 Then you can use those definitions to make GraphQL calls within an Apollo context:
 
 ```TypeScript
-import { wrapRestQuery } from 'apollo-rest-utils';
+import { wrapRestQuery } from '@encoura/apollo-rest-utils';
 
 import ROUTES from 'path/to/directory_specified_in_cli_call/__generatedRestEndpoints';
 
@@ -88,8 +88,8 @@ should be requested in camel case format. I.e. if your REST API returns a
 #### `HeadersLink` Setup
 
 ```ts
+import { HeadersLink } from '@encoura/apollo-rest-utils';
 import { RestLink } from 'apollo-link-rest';
-import { HeadersLink } from 'apollo-rest-utils';
 
 const headersLink = new HeadersLink();
 const restLink = new RestLink({ ... });

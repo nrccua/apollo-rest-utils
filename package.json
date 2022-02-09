@@ -18,8 +18,8 @@
   },
   "description": "A helper package that makes connecting apollo to rest endpoints as painless as possible",
   "devDependencies": {
-    "@actinc/eslint-config": "3.4.0",
-    "@encoura/eslint-config": "git+https://github.com/nrccua/eslint-config.git",
+    "@actinc/eslint-config": "3.4.1",
+    "@encoura/eslint-config": "git+https://github.com/nrccua/eslint-config.git#1.2.5",
     "@types/jest": "27.0.3",
     "@types/lodash": "4.14.177",
     "@types/react": "17.0.35",
@@ -33,10 +33,11 @@
     "husky": "7.0.4",
     "jest": "27.3.1",
     "lint-staged": "12.0.3",
-    "markdownlint-cli": "0.30.0",
+    "markdownlint-cli": "0.31.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.4.1",
     "react": "17.0.2",
+    "react-dom": "17.0.2",
     "standard-version": "9.3.2",
     "ts-jest": "27.0.7",
     "typescript": "4.5.2"
@@ -53,9 +54,12 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "name": "@nrccua/apollo-rest-utils",
+  "name": "@encoura/apollo-rest-utils",
   "peerDependencies": {
     "typescript": "4.5.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
