@@ -53,9 +53,12 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "name": "@nrccua/apollo-rest-utils",
+  "name": "@encoura/apollo-rest-utils",
   "peerDependencies": {
     "typescript": "4.5.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
