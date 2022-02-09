@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.4](https://github.com/nrccua/apollo-rest-utils/compare/1.5.3...1.5.4) (2022-02-09)
+
+
+### Changes
+
+* Merge pull request #21 from nrccua/feature/github_package ([defdbfa](https://github.com/nrccua/apollo-rest-utils/commit/defdbfa0fee3c910aca638570071669e906c8e53)), closes [#21](https://github.com/nrccua/apollo-rest-utils/issues/21)
+* [E4E-0]: Update package versions to remove audit/install warnings ([e7fda5b](https://github.com/nrccua/apollo-rest-utils/commit/e7fda5bad7b64cb1127bfec7bdabac6be9876076))
+* [E4E-0]: Make package public under @encoura scope ([66f109b](https://github.com/nrccua/apollo-rest-utils/commit/66f109bf635ac18af42918486dc0715cea18fbcc))
+* [E4E-0]: 1.5.3 ([0c016ac](https://github.com/nrccua/apollo-rest-utils/commit/0c016ac434bd3991cf232d5bf7b0257ee21b7213))
+
 ### [1.5.3](https://github.com/nrccua/apollo-rest-utils/compare/1.5.2...1.5.3) (2022-02-09)
 
 
