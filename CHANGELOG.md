@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/nrccua/apollo-rest-utils/compare/1.5.2...1.5.3) (2022-02-09)
+
+
+### Changes
+
+* Merge pull request #20 from nrccua/feature/github_package ([2c2ff16](https://github.com/nrccua/apollo-rest-utils/commit/2c2ff16d1381e608f9b499c92f4d90172ed29f0c)), closes [#20](https://github.com/nrccua/apollo-rest-utils/issues/20)
+* [E4E-0]: Switch to NPMJS over Github packages ([d3167eb](https://github.com/nrccua/apollo-rest-utils/commit/d3167eb228dc36b92c9910246882f78d464cc2d8))
+* Merge pull request #19 from nrccua/feature/github_package ([57ef87e](https://github.com/nrccua/apollo-rest-utils/commit/57ef87e061beb4e4a4b5006c84d3b89a997991eb)), closes [#19](https://github.com/nrccua/apollo-rest-utils/issues/19)
+* [E4E-0]: 1.5.2 ([be95a7e](https://github.com/nrccua/apollo-rest-utils/commit/be95a7eb907f3e4503f0fe77a11172adfc7ca551))
+* Merge pull request #18 from nrccua/feature/github_package ([f857204](https://github.com/nrccua/apollo-rest-utils/commit/f85720423f8ea33c6a6239e61711ce93547dad58)), closes [#18](https://github.com/nrccua/apollo-rest-utils/issues/18)
+* Merge pull request #17 from nrccua/feature/github_package ([a9f71b1](https://github.com/nrccua/apollo-rest-utils/commit/a9f71b1629d703a2d68a524f561df530f535f30b)), closes [#17](https://github.com/nrccua/apollo-rest-utils/issues/17)
+
 ### [1.5.2](https://github.com/nrccua/apollo-rest-utils/compare/1.5.1...1.5.2) (2022-02-08)
 
 
