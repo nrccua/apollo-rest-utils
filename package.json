@@ -5,16 +5,16 @@
     "url": "https://github.com/nrccua/apollo-rest-utils/issues"
   },
   "dependencies": {
-    "@apidevtools/swagger-parser": "10.0.3",
-    "@apollo/client": "3.4.17",
-    "apollo-link": "1.2.14",
-    "apollo-link-rest": "0.8.0",
-    "graphql": "15.7.2",
-    "graphql-anywhere": "4.2.7",
-    "lodash": "4.17.21",
-    "openapi-types": "9.3.1",
-    "openapi-typescript": "4.4.0",
-    "qs": "6.10.1"
+    "@apidevtools/swagger-parser": "^10.0.3",
+    "@apollo/client": "^3.4.17",
+    "apollo-link": "^1.2.14",
+    "apollo-link-rest": "^0.8.0",
+    "graphql": "^15.7.2",
+    "graphql-anywhere": "^4.2.7",
+    "lodash": "^4.17.21",
+    "openapi-types": "^9.3.1",
+    "openapi-typescript": "^4.4.0",
+    "qs": "^6.10.1"
   },
   "description": "A helper package that makes connecting apollo to rest endpoints as painless as possible",
   "devDependencies": {
@@ -55,9 +55,6 @@
   "license": "MIT",
   "main": "dist/index.js",
   "name": "@encoura/apollo-rest-utils",
-  "peerDependencies": {
-    "typescript": "4.5.2"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -84,5 +81,5 @@
     "update:version:major": "standard-version --release-as major && npm run test:lint:md",
     "update:version:minor": "standard-version --release-as minor && npm run test:lint:md"
   },
-  "version": "1.5.4"
+  "version": "1.5.5"
 }
