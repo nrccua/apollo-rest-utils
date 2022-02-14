@@ -33,10 +33,6 @@ jobs:
             ~/.npm
             **/node_modules
           key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-test-
-            ${{ runner.os }}-
       - run: rm -rf package-lock.json # Remove the package-lock so that all versions of node can be tested
       - run: npm i --legacy-peer-deps
       - run: npm run test

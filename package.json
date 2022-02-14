@@ -27,6 +27,7 @@
     "babel-plugin-transform-imports": "2.0.0",
     "eslint": "8.3.0",
     "eslint-import-resolver-babel-plugin-root-import": "1.1.1",
+    "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jest": "25.3.0",
     "eslint-plugin-new-with-error": "3.1.0",
     "eslint-plugin-react": "7.27.1",
