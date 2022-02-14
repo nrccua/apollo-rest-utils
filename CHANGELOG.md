@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.6](https://github.com/nrccua/apollo-rest-utils/compare/1.5.5...1.5.6) (2022-02-14)
+
+
+### Changes
+
+* [E4E-0]: Add eslint-plugin-import to devDependencies ([68f7d00](https://github.com/nrccua/apollo-rest-utils/commit/68f7d00271d63d2e5621ef5cf3313f5ab1ddd8f9))
+* Merge pull request #22 from nrccua/jc-deps ([dbbbc85](https://github.com/nrccua/apollo-rest-utils/commit/dbbbc8570975d2e446a233b41ed53305df0f3419)), closes [#22](https://github.com/nrccua/apollo-rest-utils/issues/22)
+
 ### [1.5.5](https://github.com/nrccua/apollo-rest-utils/compare/1.5.4...1.5.5) (2022-02-14)
 
 
