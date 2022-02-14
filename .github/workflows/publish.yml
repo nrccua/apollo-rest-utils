@@ -27,11 +27,6 @@ jobs:
           ~/.npm
           **/node_modules
         key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          ${{ runner.os }}-test-${{ env.cache-name }}-
-          ${{ runner.os }}-test-
-          ${{ runner.os }}-
     - run: npm i
     - run: npm run test
     - run: npm run build
