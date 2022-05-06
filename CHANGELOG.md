@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.7](https://github.com/nrccua/apollo-rest-utils/compare/1.5.6...1.5.7) (2022-05-06)
+
+
+### Changes
+
+* [E4E-0]: Update critical audit packages ([d3560dc](https://github.com/nrccua/apollo-rest-utils/commit/d3560dc8aa7eaa2a76e8d705315d92094b10d6b9))
+* Merge pull request #23 from nrccua/fix/publish ([d8ec65b](https://github.com/nrccua/apollo-rest-utils/commit/d8ec65bda22ade7b7160e0c4660a965e66e22981)), closes [#23](https://github.com/nrccua/apollo-rest-utils/issues/23)
+* [E4E-0]: 1.5.6 ([b8d200a](https://github.com/nrccua/apollo-rest-utils/commit/b8d200a2f328c7e9f2ef1308d333a0fc904d5e05))
+
 ### [1.5.6](https://github.com/nrccua/apollo-rest-utils/compare/1.5.5...1.5.6) (2022-02-14)
 
 
