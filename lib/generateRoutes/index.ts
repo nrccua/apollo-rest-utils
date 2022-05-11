@@ -24,26 +24,30 @@ export function addArgsToPath(endpointPath: string, parameters: OpenAPIV3.Parame
     : endpointPath.substr(1).replace(/{/g, '{args.') + (queryParams.length > 0 ? `?${queryParams.join('&')}` : '');
 }
 
-export function getResponseSchema(properties?: {
+export function getResponseSchema(properties: {
   [name: string]: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | ReferenceObject | SchemaObject;
 }): RestEndpointSchema | undefined {
-  if (!properties) {
-    return undefined;
-  }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   const result = Object.keys(properties)
-    .map((p: string) =>
-      // eslint-disable-next-line no-nested-ternary
-      'properties' in properties[p]
-        ? { [p]: getResponseSchema((properties[p] as OpenAPIV3.SchemaObject).properties) } // eslint-disable-this-line @typescript-eslint/no-unsafe-assignment
-        : 'items' in properties[p]
-        ? {
-            [p]: getResponseSchema(
-              ((properties[p] as OpenAPIV3.ArraySchemaObject).items as OpenAPIV3.SchemaObject).properties,
-            ),
+    .map((p: string) => {
+      if ('properties' in properties[p]) {
+        const pObject = properties[p] as OpenAPIV3.NonArraySchemaObject;
+        if (pObject.properties) {
+          return { [p]: getResponseSchema(pObject.properties) };
+        }
+      } else if ('items' in properties[p]) {
+        const items = (properties[p] as OpenAPIV3.ArraySchemaObject).items;
+        if ('properties' in items) {
+          const itemProperties = (items as OpenAPIV3.NonArraySchemaObject).properties;
+          if (itemProperties) {
+            return {
+              [p]: getResponseSchema(itemProperties),
+            };
           }
-        : p,
-    )
+        }
+      }
+      return p;
+    })
     .filter(p =>
       p !== undefined && _.isObject(p)
         ? Object.keys(p)
@@ -142,9 +146,15 @@ export function generateTypescript(api: OpenAPI.Document, typeImportLocation: st
           responseBody += `['schema']`;
           schema = responseObject.schema;
         }
-        if (schema && 'properties' in schema) {
+        if (schema && 'properties' in schema && schema.properties) {
           responseSchema = getResponseSchema(schema.properties);
-        } else if (schema && 'items' in schema && schema.items && 'properties' in schema.items) {
+        } else if (
+          schema &&
+          'items' in schema &&
+          schema.items &&
+          'properties' in schema.items &&
+          schema.items.properties
+        ) {
           isArray = true;
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           responseSchema = getResponseSchema(schema.items.properties);
