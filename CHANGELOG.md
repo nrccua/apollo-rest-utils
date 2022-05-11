@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.8](https://github.com/nrccua/apollo-rest-utils/compare/1.5.7...1.5.8) (2022-05-11)
+
+
+### Changes
+
+* [E4E-129]: Fix issue where array of non-objects would not be added to the responseSchema ([d8f23f9](https://github.com/nrccua/apollo-rest-utils/commit/d8f23f948611626c29c50ecb50e2ef6ce0e2fa16))
+* Merge pull request #24 from nrccua/fix/bad_npm_version ([3f41890](https://github.com/nrccua/apollo-rest-utils/commit/3f41890980bc96f3cbdb0e52d33a5d5ed6b02789)), closes [#24](https://github.com/nrccua/apollo-rest-utils/issues/24)
+* [E4E-0]: 1.5.7 ([2a82118](https://github.com/nrccua/apollo-rest-utils/commit/2a8211895ab39bf2ed2ae8380f5db3b5cee63e96))
+
 ### [1.5.7](https://github.com/nrccua/apollo-rest-utils/compare/1.5.6...1.5.7) (2022-05-06)
 
 
