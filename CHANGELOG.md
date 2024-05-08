@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.9](https://github.com/nrccua/apollo-rest-utils/compare/1.6.0...1.5.9) (2024-05-08)
+
+
+### Changes
+
+* Merge pull request #27 from nrccua/jc-build-fix ([c619a09](https://github.com/nrccua/apollo-rest-utils/commit/c619a09c3273c800c3c7f2450572f86ac79d3b2d)), closes [#27](https://github.com/nrccua/apollo-rest-utils/issues/27)
+* Merge pull request #26 from nrccua/jc-tech-upgrades ([401922c](https://github.com/nrccua/apollo-rest-utils/commit/401922c566cbbfc15bbb2619054e6e53040a1640)), closes [#26](https://github.com/nrccua/apollo-rest-utils/issues/26)
+
 ### [1.5.8](https://github.com/nrccua/apollo-rest-utils/compare/1.5.7...1.5.8) (2022-05-11)
 
 
