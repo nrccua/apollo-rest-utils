@@ -3,6 +3,7 @@
     "baseUrl": "./",
     "declaration": true,
     "esModuleInterop": true,
+    "module": "CommonJS",
     "noEmit": false,
     "outDir": "./dist",
     "typeRoots": ["./node_modules/@types"]
