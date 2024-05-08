@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: 16
+        node: ['20']
     steps:
       - uses: actions/checkout@v2
         with:
@@ -36,7 +36,3 @@ jobs:
       - run: npm run test
       - name: Build
         run: npm run build
-      - uses: romeovs/lcov-reporter-action@v0.2.16
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          lcov-file: ./build/reports/jest/lcov.info
