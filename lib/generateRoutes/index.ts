@@ -13,7 +13,6 @@ import SwaggerParser from '@apidevtools/swagger-parser';
 import _, { first } from 'lodash';
 import { OpenAPI, OpenAPIV3 } from 'openapi-types';
 import openapiTS, { ParameterObject, ReferenceObject, ResponseObject, SchemaObject } from 'openapi-typescript';
-import prettier from 'prettier';
 
 import { RestEndpointSchema } from '../types';
 
@@ -257,8 +256,7 @@ async function main(): Promise<void> {
     console.log(`Types file written to ${typesFilename}`);
     const api = await SwaggerParser.validate(swaggerUrl);
     const generatedTSEndpoints = generateTypescript(api, swaggerTypes, endpointId);
-    const prettierTSEndpoints = prettier.format(generatedTSEndpoints, { filepath: endpointsFilename });
-    fs.writeFileSync(endpointsFilename, prettierTSEndpoints);
+    fs.writeFileSync(endpointsFilename, generatedTSEndpoints);
     console.log(`Endpoint definition file written to ${endpointsFilename}`);
   }
 }
