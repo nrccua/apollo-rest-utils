@@ -17,8 +17,9 @@
   "devDependencies": {
     "@actinc/eslint-config": "3.4.1",
     "@encoura/eslint-config": "git+https://github.com/nrccua/eslint-config.git#1.2.5",
-    "@types/jest": "27.0.3",
-    "@types/lodash": "4.14.177",
+    "@types/jest": "27.5.2",
+    "@types/lodash": "4.17.1",
+    "@types/node": "20.12.11",
     "@types/react": "17.0.35",
     "babel-plugin-root-import": "5.1.0",
     "babel-plugin-transform-imports": "2.0.0",
@@ -62,7 +63,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:dist",
-    "build:dist": "tsc $(find lib | grep .ts | grep -v test.ts) --outDir dist --esModuleInterop --declaration && chmod +x dist/generateRoutes/index.js",
+    "build:dist": "tsc && chmod +x dist/generateRoutes/index.js",
     "clean": "rm -rf dist",
     "clean:full": "npm run clean && rm -rf node_modules",
     "prepare": "husky install && git config --local push.followTags true",
