@@ -7,9 +7,8 @@
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.3",
     "@apollo/client": "^3.4.17",
-    "apollo-link": "^1.2.14",
     "apollo-link-rest": "^0.8.0",
-    "graphql": "^15.7.2",
+    "graphql": "^16.8.1",
     "graphql-anywhere": "^4.2.7",
     "lodash": "^4.17.21",
     "openapi-types": "^9.3.1",

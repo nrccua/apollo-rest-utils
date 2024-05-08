@@ -1,6 +1,6 @@
 import * as apolloClientLib from '@apollo/client';
 import { ApolloClient, DocumentNode, gql, useMutation, useQuery } from '@apollo/client';
-import { print, SelectionNode } from 'graphql';
+import { Kind, OperationTypeNode, print, SelectionNode } from 'graphql';
 import { first } from 'lodash';
 
 import { IRestEndpoint } from '../types';
@@ -550,7 +550,7 @@ describe('validateQueryAgainstEndpoint', () => {
   it('should throw an error for a query with a non-operation definitions', () => {
     const query = {
       definitions: [{ kind: 'ScalarTypeDefinition', name: { kind: 'Name', value: 'NULL' } }],
-      kind: 'Document',
+      kind: Kind.DOCUMENT,
     } as DocumentNode;
 
     expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
@@ -562,12 +562,12 @@ describe('validateQueryAgainstEndpoint', () => {
     const query: DocumentNode = {
       definitions: [
         {
-          kind: 'OperationDefinition',
-          operation: 'query',
-          selectionSet: { kind: 'SelectionSet', selections: [] as readonly SelectionNode[] },
+          kind: Kind.OPERATION_DEFINITION,
+          operation: OperationTypeNode.QUERY,
+          selectionSet: { kind: Kind.SELECTION_SET, selections: [] as readonly SelectionNode[] },
         },
       ],
-      kind: 'Document',
+      kind: Kind.DOCUMENT,
     };
 
     expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError(
@@ -579,15 +579,15 @@ describe('validateQueryAgainstEndpoint', () => {
     const query: DocumentNode = {
       definitions: [
         {
-          kind: 'OperationDefinition',
-          operation: 'query',
+          kind: Kind.OPERATION_DEFINITION,
+          operation: OperationTypeNode.QUERY,
           selectionSet: {
-            kind: 'SelectionSet',
+            kind: Kind.SELECTION_SET,
             selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'NULL' } }] as readonly SelectionNode[],
           },
         },
       ],
-      kind: 'Document',
+      kind: Kind.DOCUMENT,
     };
 
     expect(() => validateQueryAgainstEndpoint(query, dummyEndpoint)).toThrowError('Query selection must be a field');
