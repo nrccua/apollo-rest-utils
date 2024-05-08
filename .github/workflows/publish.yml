@@ -7,6 +7,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['20']
     permissions:
       contents: read
       packages: write
@@ -16,7 +19,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v1
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           registry-url: https://registry.npmjs.org/
       - name: Cache node modules
         uses: actions/cache@v2
