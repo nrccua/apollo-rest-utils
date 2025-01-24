@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
-    "@apollo/client": "^3.10.3",
+    "@apollo/client": "~3.10.3",
     "apollo-link-rest": "^0.9.0",
     "graphql": "^16.8.1",
     "lodash": "^4.17.21",
